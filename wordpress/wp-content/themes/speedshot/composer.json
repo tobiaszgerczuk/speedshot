@@ -1,0 +1,13 @@
+{
+  "name": "speedshot/theme",
+  "type": "wordpress-theme",
+  "license": "MIT",
+  "require": {
+    "timber/timber": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Speedshot\\Theme\\": "app/"
+    }
+  }
+}

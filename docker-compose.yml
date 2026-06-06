@@ -1,0 +1,113 @@
+services:
+  mysql-db:
+    image: ${MYSQL_IMAGE}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PROJECT_NAME}_password
+      MYSQL_DATABASE: ${PROJECT_NAME}_db
+      MYSQL_USER: ${PROJECT_NAME}_user
+      MYSQL_PASSWORD: ${PROJECT_NAME}_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - local
+    restart: unless-stopped
+    labels:
+      - traefik.enable=false
+
+  wordpress:
+    image: ${WORDPRESS_IMAGE}
+    depends_on:
+      - mysql-db
+    entrypoint:
+      - /workspace/scripts/init-wordpress.sh
+    environment:
+      PROJECT_NAME: ${PROJECT_NAME}
+      WORDPRESS_DB_HOST: mysql-db
+      WORDPRESS_DB_NAME: ${PROJECT_NAME}_db
+      WORDPRESS_DB_USER: ${PROJECT_NAME}_user
+      WORDPRESS_DB_PASSWORD: ${PROJECT_NAME}_password
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - ./:/workspace
+      - ./wordpress:/var/www/html
+      - ./docker/php/uploads-custom.ini:/usr/local/etc/php/conf.d/uploads-custom.ini:ro
+    networks:
+      - local
+      - public
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.localhost`)
+      - traefik.http.routers.${PROJECT_NAME}.entrypoints=web
+      - traefik.http.routers.${PROJECT_NAME}.middlewares=${PROJECT_NAME}-redirect-to-https
+      - traefik.http.routers.${PROJECT_NAME}.service=${PROJECT_NAME}
+      - traefik.http.routers.${PROJECT_NAME}-secure.rule=Host(`${PROJECT_NAME}.localhost`)
+      - traefik.http.routers.${PROJECT_NAME}-secure.entrypoints=websecure
+      - traefik.http.routers.${PROJECT_NAME}-secure.tls=true
+      - traefik.http.routers.${PROJECT_NAME}-secure.service=${PROJECT_NAME}
+      - traefik.http.middlewares.${PROJECT_NAME}-redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.services.${PROJECT_NAME}.loadbalancer.server.port=80
+
+  phpmyadmin:
+    image: ${PHPMYADMIN_IMAGE}
+    depends_on:
+      - mysql-db
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${PROJECT_NAME}_password
+    networks:
+      - local
+      - public
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.${PROJECT_NAME}-pma.rule=Host(`pma.${PROJECT_NAME}.localhost`)
+      - traefik.http.routers.${PROJECT_NAME}-pma.entrypoints=web
+      - traefik.http.routers.${PROJECT_NAME}-pma.middlewares=${PROJECT_NAME}-redirect-to-https
+      - traefik.http.routers.${PROJECT_NAME}-pma.service=${PROJECT_NAME}-pma
+      - traefik.http.routers.${PROJECT_NAME}-pma-secure.rule=Host(`pma.${PROJECT_NAME}.localhost`)
+      - traefik.http.routers.${PROJECT_NAME}-pma-secure.entrypoints=websecure
+      - traefik.http.routers.${PROJECT_NAME}-pma-secure.tls=true
+      - traefik.http.routers.${PROJECT_NAME}-pma-secure.service=${PROJECT_NAME}-pma
+      - traefik.http.services.${PROJECT_NAME}-pma.loadbalancer.server.port=80
+
+  wp-cli:
+    image: ${WPCLI_IMAGE}
+    depends_on:
+      - mysql-db
+      - wordpress
+    environment:
+      PROJECT_NAME: ${PROJECT_NAME}
+      WORDPRESS_DB_HOST: mysql-db
+      WORDPRESS_DB_NAME: ${PROJECT_NAME}_db
+      WORDPRESS_DB_USER: ${PROJECT_NAME}_user
+      WORDPRESS_DB_PASSWORD: ${PROJECT_NAME}_password
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - ./:/workspace
+      - ./wordpress:/var/www/html
+      - ./docker/php/uploads-custom.ini:/usr/local/etc/php/conf.d/uploads-custom.ini:ro
+    networks:
+      - local
+      - public
+    labels:
+      - traefik.enable=false
+
+volumes:
+  db_data:
+    name: ${PROJECT_NAME}_db_data
+
+networks:
+  local:
+    internal: true
+    name: ${PROJECT_NAME}-local
+
+  public:
+    external: true
+    name: web
