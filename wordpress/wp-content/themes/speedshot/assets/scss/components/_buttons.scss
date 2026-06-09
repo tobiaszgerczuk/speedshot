@@ -24,7 +24,7 @@
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(90, 178, 94, 0.18);
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.22);
   }
 }
 

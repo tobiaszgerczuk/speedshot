@@ -1,0 +1,42 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="block-about-section__decor block-about-section__decor--star block-about-section__decor--star-one" aria-hidden="true"></div>
+  <div class="block-about-section__decor block-about-section__decor--star block-about-section__decor--star-two" aria-hidden="true"></div>
+  <div class="block-about-section__decor block-about-section__decor--spark block-about-section__decor--spark-one" aria-hidden="true"></div>
+  <div class="block-about-section__decor block-about-section__decor--rocket" aria-hidden="true">
+    <span class="block-about-section__rocket-window"></span>
+    <span class="block-about-section__rocket-flame"></span>
+  </div>
+
+  <div class="block-about-section__inner">
+    <div class="block-about-section__content" data-reveal="up" data-reveal-duration="760">
+      {% if fields['about_section_eyebrow'] %}
+        <p class="block-about-section__eyebrow">{{ fields['about_section_eyebrow'] }}</p>
+      {% endif %}
+
+      <h2 class="block-about-section__title">{{ fields['about_section_title'] ?: 'O nas' }}</h2>
+
+      {% if fields['about_section_content'] %}
+        <div class="block-about-section__text">
+          {{ fields['about_section_content']|raw }}
+        </div>
+      {% elseif is_preview %}
+        <p class="block-about-section__placeholder">Dodaj tekst sekcji O nas w polach bloku.</p>
+      {% endif %}
+
+      {% if fields['about_section_link'] %}
+        {% include 'components/button.twig' with {
+          link: fields['about_section_link'],
+          class: 'block-about-section__button'
+        } only %}
+      {% endif %}
+    </div>
+
+    <div class="block-about-section__media" data-reveal="zoom-up" data-reveal-delay="120" data-reveal-duration="760">
+      {% if fields['about_section_image'] %}
+        {{ fn('wp_get_attachment_image', fields['about_section_image'], 'large', false, { class: 'block-about-section__image' }) }}
+      {% elseif is_preview %}
+        <div class="block-about-section__image-placeholder">Wybierz obrazek po prawej stronie.</div>
+      {% endif %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}" data-upcoming-events{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <span class="block-upcoming-events__rocket" aria-hidden="true"></span>
+  <span class="block-upcoming-events__star block-upcoming-events__star--one" aria-hidden="true"></span>
+  <span class="block-upcoming-events__star block-upcoming-events__star--two" aria-hidden="true"></span>
+  <span class="block-upcoming-events__star block-upcoming-events__star--three" aria-hidden="true"></span>
+  <span class="block-upcoming-events__planet" aria-hidden="true"></span>
+  <span class="block-upcoming-events__target" aria-hidden="true"></span>
+  <span class="block-upcoming-events__bolt" aria-hidden="true"></span>
+  <span class="block-upcoming-events__spark block-upcoming-events__spark--one" aria-hidden="true"></span>
+  <span class="block-upcoming-events__spark block-upcoming-events__spark--two" aria-hidden="true"></span>
+
+  <div class="block-upcoming-events__header" data-reveal="up" data-reveal-duration="760">
+    <div class="block-upcoming-events__copy">
+      {% if fields['upcoming_events_eyebrow'] %}
+        <p class="block-upcoming-events__eyebrow">{{ fields['upcoming_events_eyebrow'] }}</p>
+      {% endif %}
+
+      <h2 class="block-upcoming-events__title">{{ fields['upcoming_events_title'] ?: 'Nadchodzące wydarzenia' }}</h2>
+
+      {% if fields['upcoming_events_content'] %}
+        <div class="block-upcoming-events__intro">
+          {{ fields['upcoming_events_content']|raw }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if events|length > 1 %}
+      <div class="block-upcoming-events__nav" aria-label="Nawigacja wydarzeń">
+        <button class="block-upcoming-events__arrow" type="button" data-events-prev aria-label="Poprzednie wydarzenia">
+          {% include 'components/button-icon.twig' with { name: 'arrow-left' } only %}
+        </button>
+        <button class="block-upcoming-events__arrow" type="button" data-events-next aria-label="Następne wydarzenia">
+          {% include 'components/button-icon.twig' with { name: 'arrow-right' } only %}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if events %}
+    <div class="block-upcoming-events__slider" data-events-slider tabindex="0" aria-label="Lista nadchodzących wydarzeń">
+      {% for event in events %}
+        <article class="block-upcoming-events__card" data-reveal="up" data-reveal-delay="{{ loop.index0 * 70 }}" data-reveal-duration="760">
+          <a class="block-upcoming-events__card-link" href="{{ event.url }}">
+            <span class="block-upcoming-events__date">
+              <span class="block-upcoming-events__day">{{ event.day }}</span>
+              <span class="block-upcoming-events__month">{{ event.month }}</span>
+            </span>
+
+            <span class="block-upcoming-events__body">
+              {% if event.badge %}
+                <span class="block-upcoming-events__badge">{{ event.badge }}</span>
+              {% endif %}
+
+              <span class="block-upcoming-events__card-title">{{ event.title }}</span>
+
+              <span class="block-upcoming-events__meta">
+                {% if event.weekday %}{{ event.weekday }}{% endif %}
+                {% if event.time_range %}<span>{{ event.time_range }}</span>{% endif %}
+                {% if event.location %}<span>{{ event.location }}</span>{% endif %}
+              </span>
+
+              {% if event.excerpt %}
+                <span class="block-upcoming-events__excerpt">{{ event.excerpt }}</span>
+              {% endif %}
+            </span>
+
+            {% include 'components/button-icon.twig' with { name: 'arrow-up-right' } only %}
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  {% elseif is_preview %}
+    <p class="block-upcoming-events__empty">Dodaj kilka przyszłych wydarzeń, żeby wyświetlić slider.</p>
+  {% endif %}
+
+  {% if fields['upcoming_events_link'] %}
+    <div class="block-upcoming-events__footer">
+      {% include 'components/button.twig' with {
+        link: fields['upcoming_events_link'],
+        class: 'block-upcoming-events__button',
+        icon: 'arrow-right'
+      } only %}
+    </div>
+  {% endif %}
+</section>

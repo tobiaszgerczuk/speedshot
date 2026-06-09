@@ -1,0 +1,11 @@
+{
+    "title": "Upcoming Events",
+    "description": "Slider with upcoming events from the Events post type.",
+    "category": "wco-blocks",
+    "icon": "calendar-alt",
+    "keywords": [
+        "events",
+        "calendar",
+        "slider"
+    ]
+}

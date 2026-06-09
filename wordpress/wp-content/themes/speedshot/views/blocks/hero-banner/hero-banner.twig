@@ -1,21 +1,56 @@
-<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
-	<div class="container">
-    <div class="block-hero-banner__inner">
-		  <h2 class="block-hero-banner__title">{{ fields['hero_banner_title'] ?: 'Hero Banner' }}</h2>
+{% set background_images = fields['hero_banner_background_images']|default([]) %}
+{% set slider_duration = fields['hero_banner_slider_duration']|default(6500) %}
+
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}" data-hero-slider-duration="{{ slider_duration }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="block-hero-banner__media-layer" aria-hidden="true">
+    {% if background_images %}
+      <div class="block-hero-banner__background-slider">
+        {% for image in background_images %}
+          {% set image_url = image.sizes.large|default(image.url|default('')) %}
+          {% if image_url %}
+            <div class="block-hero-banner__background-slide{{ loop.first ? ' is-active' : '' }}" style="background-image: url('{{ image_url }}');"></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="block-hero-banner__overlay" aria-hidden="true"></div>
+  <div class="block-hero-banner__bottom-fade" aria-hidden="true"></div>
+
+	<div class="container block-hero-banner__container">
+    <div class="block-hero-banner__inner" data-reveal="up" data-reveal-on-load="true" data-reveal-duration="760">
+      {% if fields['hero_banner_eyebrow'] %}
+        <p class="block-hero-banner__eyebrow">{{ fields['hero_banner_eyebrow'] }}</p>
+      {% endif %}
+
+		  <h1 class="block-hero-banner__title">{{ fields['hero_banner_title'] ?: 'SpeedShot' }}</h1>
 
 		  {% if fields['hero_banner_content'] %}
 			  <div class="block-hero-banner__content">
 				  {{ fields['hero_banner_content']|raw }}
 			  </div>
 		  {% elseif is_preview %}
-			  <p class="block-hero-banner__placeholder">Add fields for the hero-banner block in ACF.</p>
+			  <p class="block-hero-banner__placeholder">Dodaj tło, tytuł, opis i przyciski w polach bloku.</p>
 		  {% endif %}
 
-      {% if fields['hero_banner_link'] %}
-        {% include 'components/button.twig' with {
-          link: fields['hero_banner_link'],
-          class: 'block-hero-banner__button'
-        } only %}
+      {% if fields['hero_banner_link'] or fields['hero_banner_secondary_link'] %}
+        <div class="block-hero-banner__actions">
+          {% if fields['hero_banner_link'] %}
+            {% include 'components/button.twig' with {
+              link: fields['hero_banner_link'],
+              class: 'block-hero-banner__button block-hero-banner__button--primary'
+            } only %}
+          {% endif %}
+
+          {% if fields['hero_banner_secondary_link'] %}
+            {% include 'components/button.twig' with {
+              link: fields['hero_banner_secondary_link'],
+              variant: 'ghost',
+              class: 'block-hero-banner__button block-hero-banner__button--secondary'
+            } only %}
+          {% endif %}
+        </div>
       {% endif %}
     </div>
 	</div>

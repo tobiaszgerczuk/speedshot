@@ -5,6 +5,23 @@ import Reveal from './components/Reveal.js';
 import Header from './modules/header.js';
 import swipers from './modules/swipers.js';
 import WcoShop from './ecommerce/woocommerce.js';
+import {
+  createIcons,
+  Car,
+  Castle,
+  CircleDot,
+  Crosshair,
+  Flag,
+  Gamepad2,
+  Gem,
+  Plane,
+  Radio,
+  Sailboat,
+  ScanSearch,
+  Sparkles,
+  Target,
+  Waves,
+} from 'lucide';
 // Optional: uncomment when a block needs Swiper.
 // import Swiper from 'swiper';
 // import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -40,6 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
   new Reveal();
   new WcoShop();
   initBlockModules();
+  createIcons({
+    icons: {
+      Car,
+      Castle,
+      CircleDot,
+      Crosshair,
+      Flag,
+      Gamepad2,
+      Gem,
+      Plane,
+      Radio,
+      Sailboat,
+      ScanSearch,
+      Sparkles,
+      Target,
+      Waves,
+    },
+  });
 
   // If you install Swiper from npm, uncomment imports above and set the engine here.
   // swipers.setEngine(Swiper);

@@ -5,6 +5,10 @@
 .env.local
 .env.*.local
 
+# Local Docker setup
+docker-compose.yml
+scripts/
+
 # Ignore everything in WordPress by default
 /wordpress/*
 
@@ -12,18 +16,12 @@
 !/wordpress/wp-content/
 /wordpress/wp-content/*
 
-# Ignore installed plugins and uploads by default
-/wordpress/wp-content/plugins/
-/wordpress/wp-content/uploads/
+# Keep all plugins in the repository
+!/wordpress/wp-content/plugins/
+!/wordpress/wp-content/plugins/**
 
 # Ignore all themes except the active project theme
 !/wordpress/wp-content/themes/
 /wordpress/wp-content/themes/*
 !/wordpress/wp-content/themes/speedshot/
 !/wordpress/wp-content/themes/speedshot/**
-
-# Ignore nested repository metadata and installed dependencies
-**/.git/
-**/.DS_Store
-**/node_modules/
-**/vendor/

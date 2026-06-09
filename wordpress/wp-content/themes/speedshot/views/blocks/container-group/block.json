@@ -17,6 +17,22 @@
     "containerWidth": {
       "type": "string",
       "default": "default"
+    },
+    "sectionGapTop": {
+      "type": "string",
+      "default": "none"
+    },
+    "sectionGapBottom": {
+      "type": "string",
+      "default": "none"
+    },
+    "sectionSpaceTop": {
+      "type": "string",
+      "default": "md"
+    },
+    "sectionSpaceBottom": {
+      "type": "string",
+      "default": "md"
     }
   },
   "keywords": [

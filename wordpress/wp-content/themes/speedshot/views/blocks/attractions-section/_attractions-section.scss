@@ -1,0 +1,257 @@
+.block-attractions-section {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto;
+    left: 50%;
+    z-index: -3;
+    width: 100vw;
+    background:
+      radial-gradient(circle at 18% 18%, rgba($color-primary, 0.1), transparent 28rem),
+      radial-gradient(circle at 86% 72%, rgba($color-accent, 0.1), transparent 30rem),
+      linear-gradient(180deg, rgba($color-surface, 0.45) 0%, $color-surface 44%, rgba($color-surface, 0.72) 100%);
+    transform: translateX(-50%);
+  }
+
+  &__decor {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 999px;
+    filter: blur(2px);
+  }
+
+  &__decor--one {
+    top: 7%;
+    left: clamp(-12rem, -9vw, -5rem);
+    width: 240px;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba($color-primary, 0.2), rgba($color-primary, 0));
+  }
+
+  &__decor--two {
+    right: clamp(-14rem, -10vw, -5rem);
+    bottom: 10%;
+    width: 300px;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba($color-accent, 0.18), rgba($color-accent, 0));
+  }
+
+  &__header {
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    margin: 0 0 0.9rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: $radius-sm;
+    background: rgba($color-primary, 0.1);
+    color: $color-primary-hover;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  &__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.55fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__title {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  &__intro {
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.2vw, 1.14rem);
+
+    p {
+      color: $color-muted;
+    }
+  }
+
+  &__groups {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  &__group {
+    position: relative;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border: 1px solid rgba($color-black, 0.08);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba($color-white, 0.96), rgba($color-surface, 0.76));
+    box-shadow: 0 18px 52px rgba($color-black, 0.06);
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__group-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $color-black;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    font-weight: 800;
+    line-height: 1;
+
+    &::before {
+      content: "";
+      width: 0.7rem;
+      aspect-ratio: 1;
+      border-radius: 999px;
+      background: $color-primary;
+      box-shadow: 0 0 0 0.35rem rgba($color-primary, 0.12);
+    }
+  }
+
+  &__group-count {
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 0.35rem 0.65rem;
+    border-radius: $radius-sm;
+    background: rgba($color-accent, 0.1);
+    color: $color-accent;
+    font-size: 0.88rem;
+    font-weight: 800;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+
+    @include laptop {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.85rem;
+    align-items: start;
+    min-height: 100%;
+    padding: 1rem;
+    border: 1px solid rgba($color-black, 0.08);
+    border-radius: 8px;
+    background: $color-white;
+    color: $color-black;
+    text-decoration: none;
+    transition:
+      transform $transition-fast,
+      border-color $transition-fast,
+      box-shadow $transition-fast,
+      background $transition-fast;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($color-primary, 0.34);
+      background: linear-gradient(180deg, $color-white 0%, rgba($color-primary, 0.06) 100%);
+      box-shadow: 0 16px 34px rgba($color-black, 0.08);
+      color: $color-black;
+      transform: translateY(-3px);
+    }
+
+    .btn__icon {
+      width: 0.95rem;
+      height: 0.95rem;
+      margin-top: 0.25rem;
+      color: $color-primary;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity $transition-fast, transform $transition-fast;
+    }
+
+    &:hover .btn__icon,
+    &:focus-visible .btn__icon {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 8px;
+    background: rgba($color-primary, 0.11);
+    color: $color-primary-hover;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke-width: 2.4;
+    }
+  }
+
+  &__card-copy {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  &__card-title {
+    color: $color-black;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  &__card-text {
+    color: $color-muted;
+    font-size: 0.92rem;
+    line-height: 1.38;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  &__placeholder {
+    padding: 1.5rem;
+    border: 1px dashed $color-border;
+    border-radius: 8px;
+    color: $color-muted;
+    text-align: center;
+  }
+
+  @include mobile {
+    &__group-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+}

@@ -5,7 +5,9 @@ namespace Speedshot\Theme\Core;
 use Timber\Timber;
 use Speedshot\Theme\Core\Acf;
 use Speedshot\Theme\Core\Assets;
+use Speedshot\Theme\Core\ContactForm;
 use Speedshot\Theme\Core\Media;
+use Speedshot\Theme\Core\PostTypes;
 use Speedshot\Theme\Core\Templating;
 use Speedshot\Theme\Blocks\Registry as BlocksRegistry;
 use Speedshot\Theme\Rest\Api as RestApi;
@@ -32,6 +34,12 @@ class Theme
         // Media helpers / upload support
         Media::boot();
 
+        // Contact form
+        ContactForm::boot();
+
+        // Custom post types
+        PostTypes::boot();
+
         // ACF Local JSON
         Acf::boot();
         add_filter('acf/settings/save_json', [Acf::class, 'save_json']);
@@ -44,20 +52,6 @@ class Theme
         // REST API
         RestApi::boot();
 
-        add_action('init', function () {
-            register_post_type('inwestycja', [
-              'labels' => [
-                'name' => 'Inwestycje',
-                'singular_name' => 'Inwestycja',
-              ],
-              'public' => true,
-              'menu_icon' => 'dashicons-location-alt',
-              'supports' => ['title', 'editor', 'thumbnail'],
-              'show_in_rest' => true,
-            ]);
-          });
-          
-          
     }
 
     

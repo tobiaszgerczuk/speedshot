@@ -159,6 +159,22 @@ class Registry
                     'type' => 'string',
                     'default' => 'default',
                 ],
+                'sectionGapTop' => [
+                    'type' => 'string',
+                    'default' => 'none',
+                ],
+                'sectionGapBottom' => [
+                    'type' => 'string',
+                    'default' => 'none',
+                ],
+                'sectionSpaceTop' => [
+                    'type' => 'string',
+                    'default' => 'md',
+                ],
+                'sectionSpaceBottom' => [
+                    'type' => 'string',
+                    'default' => 'md',
+                ],
             ],
             [__CLASS__, 'render_container_group_callback']
         );
@@ -317,6 +333,8 @@ class Registry
             'Container Group' => 'Grupa kontenera',
             'FAQ Accordion' => 'FAQ akordeon',
             'Hero Banner' => 'Baner hero',
+            'About Section' => 'O nas',
+            'Attractions Section' => 'Atrakcje',
             'Latest Posts' => 'Najnowsze wpisy',
             'Services' => 'Usługi',
             'Spacer' => 'Separator',
@@ -340,6 +358,8 @@ class Registry
             'Wrapper block with configurable container width.' => 'Blok opakowujący z wyborem szerokości kontenera.',
             'Accordion FAQ block.' => 'Blok FAQ w formie akordeonu.',
             'Latest blog posts block with REST pagination.' => 'Blok najnowszych wpisów blogowych z paginacją REST.',
+            'About section with text, button, image, and playful background decorations.' => 'Sekcja O nas z tekstem, przyciskiem, obrazem i dziecięcymi dekoracjami w tle.',
+            'Attractions grid generated from the Attractions submenu.' => 'Grid atrakcji generowany z podmenu Atrakcje.',
             'Services cards block.' => 'Blok kart usług.',
             'Spacing separator block with independent mobile and desktop height.' => 'Blok separatora odstępu z niezależną wysokością dla mobile i desktop.',
             'Testimonials slider block.' => 'Blok slidera opinii.',
@@ -368,6 +388,11 @@ class Registry
             'layout' => 'układ',
             'split' => 'podział',
             'content' => 'treść',
+            'about' => 'o nas',
+            'kids' => 'dzieci',
+            'attractions' => 'atrakcje',
+            'menu' => 'menu',
+            'grid' => 'grid',
         ];
 
         return $translations[$value] ?? $value;
@@ -454,6 +479,19 @@ class Registry
 
         if (!empty($attributes['containerWidth'])) {
             $fields['container_width'] = $attributes['containerWidth'];
+        }
+
+        $attributeFieldMap = [
+            'sectionGapTop' => 'section_gap_top',
+            'sectionGapBottom' => 'section_gap_bottom',
+            'sectionSpaceTop' => 'section_space_top',
+            'sectionSpaceBottom' => 'section_space_bottom',
+        ];
+
+        foreach ($attributeFieldMap as $attributeKey => $fieldKey) {
+            if (!empty($attributes[$attributeKey]) && is_string($attributes[$attributeKey])) {
+                $fields[$fieldKey] = $attributes[$attributeKey];
+            }
         }
 
         $context['fields'] = $fields;

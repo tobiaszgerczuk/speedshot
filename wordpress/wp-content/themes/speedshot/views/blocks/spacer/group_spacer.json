@@ -1,4 +1,5 @@
 {
+    "ID": 192,
     "key": "group_block_spacer",
     "title": "Spacer Block",
     "fields": [
@@ -16,7 +17,9 @@
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "parent": "group_block_spacer",
+            "menu_order": 0
         },
         {
             "key": "field_spacer_desktop_mode",
@@ -41,7 +44,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "parent": "group_block_spacer",
+            "menu_order": 1
         },
         {
             "key": "field_spacer_desktop_size",
@@ -78,7 +83,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "parent": "group_block_spacer",
+            "menu_order": 2
         },
         {
             "key": "field_spacer_desktop_custom",
@@ -105,7 +112,9 @@
             "min": 0,
             "max": 600,
             "step": 1,
-            "append": "px"
+            "append": "px",
+            "parent": "group_block_spacer",
+            "menu_order": 3
         },
         {
             "key": "field_spacer_mobile_tab",
@@ -121,7 +130,9 @@
                 "id": ""
             },
             "placement": "top",
-            "endpoint": 0
+            "endpoint": 0,
+            "parent": "group_block_spacer",
+            "menu_order": 4
         },
         {
             "key": "field_spacer_mobile_mode",
@@ -146,7 +157,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "parent": "group_block_spacer",
+            "menu_order": 5
         },
         {
             "key": "field_spacer_mobile_size",
@@ -183,7 +196,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "parent": "group_block_spacer",
+            "menu_order": 6
         },
         {
             "key": "field_spacer_mobile_custom",
@@ -210,7 +225,9 @@
             "min": 0,
             "max": 600,
             "step": 1,
-            "append": "px"
+            "append": "px",
+            "parent": "group_block_spacer",
+            "menu_order": 7
         }
     ],
     "location": [
@@ -231,11 +248,15 @@
     "active": true,
     "description": "Generated for the Spacer block.",
     "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
     "wco_metadata": {
         "block_name": "spacer",
         "icon": "minus",
         "category": "wco-blocks",
         "text_domain": "speedshot"
     },
-    "modified": 1773651600
+    "modified": 1773651600,
+    "_valid": true
 }

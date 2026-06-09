@@ -1,0 +1,12 @@
+{
+    "title": "Attractions Section",
+    "description": "Attractions grid generated from the Attractions submenu.",
+    "category": "wco-blocks",
+    "icon": "grid-view",
+    "keywords": [
+        "attractions",
+        "offer",
+        "menu",
+        "grid"
+    ]
+}

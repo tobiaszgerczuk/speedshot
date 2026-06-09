@@ -195,7 +195,8 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "parent": "group_block_text-image"
+            "parent": "group_block_text-image",
+            "menu_order": 8
         },
         {
             "key": "field_text_image_spacing_tab",
@@ -214,7 +215,8 @@
             "endpoint": 0,
             "parent": "group_block_text-image",
             "open": 0,
-            "multi_expand": 1
+            "multi_expand": 1,
+            "menu_order": 9
         },
         {
             "key": "field_text_image_section_gap_top",

@@ -1,0 +1,43 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <span class="block-available-cities__shape block-available-cities__shape--map" aria-hidden="true"></span>
+  <span class="block-available-cities__shape block-available-cities__shape--pin" aria-hidden="true"></span>
+  <span class="block-available-cities__shape block-available-cities__shape--route" aria-hidden="true"></span>
+
+  <div class="block-available-cities__header" data-reveal="up" data-reveal-duration="760">
+    <p class="block-available-cities__eyebrow">{{ fields['available_cities_eyebrow'] ?: 'Strefa sportu dla dzieci' }}</p>
+
+    <div class="block-available-cities__heading">
+      <h2 class="block-available-cities__title">{{ fields['available_cities_title'] ?: 'Dostępne miasta' }}</h2>
+
+      <div class="block-available-cities__intro">
+        {% if fields['available_cities_content'] %}
+          {{ fields['available_cities_content']|raw }}
+        {% else %}
+          <p>Aktywna zabawa, sportowe emocje i bezpieczne wyzwania w wybranych lokalizacjach. Sprawdź najbliższe miasto i zobacz szczegóły strefy.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="block-available-cities__grid">
+    {% for item in available_cities %}
+      <article class="block-available-cities__card" data-reveal="up" data-reveal-delay="{{ loop.index0 * 70 }}" data-reveal-duration="760">
+        <a class="block-available-cities__card-link" href="{{ item.url }}">
+          <span class="block-available-cities__number">{{ '%02d'|format(loop.index) }}</span>
+          <span class="block-available-cities__pin" aria-hidden="true"></span>
+
+          <span class="block-available-cities__card-body">
+            <span class="block-available-cities__city">{{ item.city }}</span>
+            <span class="block-available-cities__venue">{{ item.venue }}</span>
+            <span class="block-available-cities__address">{{ item.address }}</span>
+          </span>
+
+          <span class="block-available-cities__cta">
+            <span>Zobacz szczegóły</span>
+            {% include 'components/button-icon.twig' with { name: 'arrow-up-right' } only %}
+          </span>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</section>

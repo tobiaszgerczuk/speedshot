@@ -34,7 +34,11 @@ class Templating
             $context['cart_url'] = function_exists('wc_get_cart_url') ? wc_get_cart_url() : null;
         }
 
-        $context['global_settings'] = Acf::get_global_settings();
+        $globalSettings = Acf::get_global_settings();
+        $context['global_settings'] = $globalSettings;
+        $context['acf'] = array_merge($context['acf'] ?? [], [
+            'logo' => $globalSettings['logo'] ?? null,
+        ]);
 
         return $context;
     }

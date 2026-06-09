@@ -4,6 +4,51 @@
     "title": "Hero Banner Block",
     "fields": [
         {
+            "key": "field_hero_banner_background_images",
+            "label": "Background images",
+            "name": "hero_banner_background_images",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Images used as full-screen hero background slides.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min": 1,
+            "max": "",
+            "insert": "append",
+            "preview_size": "medium",
+            "parent": "group_block_hero-banner",
+            "menu_order": 0
+        },
+        {
+            "key": "field_hero_banner_eyebrow",
+            "label": "Eyebrow",
+            "name": "hero_banner_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Small text displayed above the title.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent": "group_block_hero-banner",
+            "menu_order": 1
+        },
+        {
             "key": "field_hero_banner_title",
             "label": "Title",
             "name": "hero_banner_title",
@@ -23,7 +68,7 @@
             "prepend": "",
             "append": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 0
+            "menu_order": 2
         },
         {
             "key": "field_hero_banner_content",
@@ -42,7 +87,7 @@
             "default_value": "",
             "placeholder": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 1,
+            "menu_order": 3,
             "tabs": "all",
             "toolbar": "full",
             "media_upload": 1,
@@ -50,7 +95,7 @@
         },
         {
             "key": "field_hero_banner_link",
-            "label": "Link",
+            "label": "Primary button",
             "name": "hero_banner_link",
             "aria-label": "",
             "type": "link",
@@ -64,7 +109,49 @@
             },
             "return_format": "array",
             "parent": "group_block_hero-banner",
-            "menu_order": 2
+            "menu_order": 4
+        },
+        {
+            "key": "field_hero_banner_secondary_link",
+            "label": "Secondary button",
+            "name": "hero_banner_secondary_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Optional second button displayed next to the primary CTA.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "parent": "group_block_hero-banner",
+            "menu_order": 5
+        },
+        {
+            "key": "field_hero_banner_slider_duration",
+            "label": "Slide duration",
+            "name": "hero_banner_slider_duration",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Time between background image changes, in milliseconds.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 6500,
+            "min": 3000,
+            "max": 15000,
+            "step": 500,
+            "placeholder": "6500",
+            "prepend": "",
+            "append": "ms",
+            "parent": "group_block_hero-banner",
+            "menu_order": 6
         },
         {
             "key": "field_hero_banner_section_tab",
@@ -82,7 +169,7 @@
             },
             "endpoint": 0,
             "parent": "group_block_hero-banner",
-            "menu_order": 3,
+            "menu_order": 7,
             "open": 0,
             "multi_expand": 1
         },
@@ -102,7 +189,7 @@
             },
             "default_value": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 4,
+            "menu_order": 8,
             "return_format": "string",
             "enable_opacity": 0
         },
@@ -125,7 +212,8 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "parent": "group_block_hero-banner"
+            "parent": "group_block_hero-banner",
+            "menu_order": 9
         },
         {
             "key": "field_hero_banner_spacing_tab",
@@ -144,7 +232,8 @@
             "endpoint": 0,
             "parent": "group_block_hero-banner",
             "open": 0,
-            "multi_expand": 1
+            "multi_expand": 1,
+            "menu_order": 10
         },
         {
             "key": "field_hero_banner_section_gap_top",
@@ -176,7 +265,7 @@
             "ajax": 0,
             "placeholder": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 7
+            "menu_order": 11
         },
         {
             "key": "field_hero_banner_section_gap_bottom",
@@ -208,7 +297,7 @@
             "ajax": 0,
             "placeholder": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 8
+            "menu_order": 12
         },
         {
             "key": "field_hero_banner_section_space_top",
@@ -240,7 +329,7 @@
             "ajax": 0,
             "placeholder": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 9
+            "menu_order": 13
         },
         {
             "key": "field_hero_banner_section_space_bottom",
@@ -272,7 +361,7 @@
             "ajax": 0,
             "placeholder": "",
             "parent": "group_block_hero-banner",
-            "menu_order": 10
+            "menu_order": 14
         }
     ],
     "location": [
@@ -294,7 +383,7 @@
     "description": "Generated for the Hero Banner block.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772619145,
+    "modified": 1780820308,
     "wco_metadata": {
         "block_name": "hero-banner",
         "icon": "layout",

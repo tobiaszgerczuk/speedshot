@@ -1,0 +1,114 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <span class="block-contact-section__shape block-contact-section__shape--star" aria-hidden="true"></span>
+  <span class="block-contact-section__shape block-contact-section__shape--rocket" aria-hidden="true"></span>
+  <span class="block-contact-section__shape block-contact-section__shape--target" aria-hidden="true"></span>
+
+  <div class="container">
+    <div class="block-contact-section__header" data-reveal="up" data-reveal-duration="760">
+      <p class="block-contact-section__eyebrow">{{ fields['contact_section_eyebrow'] ?: 'Kontakt' }}</p>
+      <h2 class="block-contact-section__title">{{ fields['contact_section_title'] ?: 'Zaplanujmy zabawę' }}</h2>
+      <div class="block-contact-section__intro">
+        {% if fields['contact_section_content'] %}
+          {{ fields['contact_section_content']|raw }}
+        {% else %}
+          <p>Napisz, gdzie i kiedy chcesz zorganizować atrakcje. Oddzwonimy z propozycją zestawu dopasowanego do wieku, liczby uczestników i miejsca wydarzenia.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="block-contact-section__layout">
+      <aside class="block-contact-section__details" data-reveal="up" data-reveal-duration="760">
+        <h3>Porozmawiajmy o wydarzeniu</h3>
+        <p>SpeedShot przyjeżdża z gotową organizacją atrakcji dla szkół, rodzin, firm i pikników plenerowych.</p>
+
+        <ul class="block-contact-section__contact-list">
+          {% for detail in contact_details %}
+            <li>
+              <span class="block-contact-section__contact-icon block-contact-section__contact-icon--{{ detail.icon }}" aria-hidden="true"></span>
+              <span>
+                <strong>{{ detail.label }}</strong>
+                {% if detail.url %}
+                  <a href="{{ detail.url }}">{{ detail.value }}</a>
+                {% else %}
+                  <span>{{ detail.value }}</span>
+                {% endif %}
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+      </aside>
+
+      <div class="block-contact-section__form-card" data-reveal="up" data-reveal-delay="120" data-reveal-duration="760">
+        {% if contact_status == 'sent' %}
+          <div class="block-contact-section__notice block-contact-section__notice--success">
+            Dziękujemy, wiadomość została wysłana. Skontaktujemy się najszybciej jak to możliwe.
+          </div>
+        {% elseif contact_status == 'error' %}
+          <div class="block-contact-section__notice block-contact-section__notice--error">
+            Nie udało się wysłać formularza. Sprawdź wymagane pola i spróbuj ponownie.
+          </div>
+        {% endif %}
+
+        <form class="block-contact-section__form" action="{{ form_action }}" method="post">
+          <input type="hidden" name="action" value="{{ form_action_name }}">
+          {{ function('wp_nonce_field', nonce_action, nonce_field, false, false) }}
+          <label class="block-contact-section__honeypot">
+            <span>Strona www</span>
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+
+          <div class="block-contact-section__fields">
+            <label>
+              <span>Imię i nazwisko <em>*</em></span>
+              <input type="text" name="name" required autocomplete="name">
+            </label>
+
+            <label>
+              <span>Telefon <em>*</em></span>
+              <input type="tel" name="phone" required autocomplete="tel">
+            </label>
+
+            <label>
+              <span>Email <em>*</em></span>
+              <input type="email" name="email" required autocomplete="email">
+            </label>
+
+            <label>
+              <span>Miejsce <em>*</em></span>
+              <input type="text" name="place" required autocomplete="address-level2">
+            </label>
+
+            <label>
+              <span>Liczba osób <em>*</em></span>
+              <input type="number" name="people" min="1" required>
+            </label>
+
+            <label>
+              <span>Data <em>*</em></span>
+              <input type="date" name="date" required>
+            </label>
+          </div>
+
+          <fieldset class="block-contact-section__attractions">
+            <legend>Jaka atrakcja Cię interesuje? <em>*</em></legend>
+            <div class="block-contact-section__checkbox-grid">
+              {% for attraction in attractions %}
+                <label>
+                  <input type="checkbox" name="attractions[]" value="{{ attraction }}">
+                  <span>{{ attraction }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+
+          <label class="block-contact-section__message">
+            <span>Dodatkowa wiadomość</span>
+            <textarea name="message" rows="4"></textarea>
+          </label>
+
+          <button class="block-contact-section__submit" type="submit">Wyślij</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

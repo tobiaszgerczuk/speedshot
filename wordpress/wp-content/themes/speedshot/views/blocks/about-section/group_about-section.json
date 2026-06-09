@@ -1,0 +1,337 @@
+{
+    "ID": 95,
+    "key": "group_block_about-section",
+    "title": "About Section Block",
+    "fields": [
+        {
+            "key": "field_about_section_eyebrow",
+            "label": "Eyebrow",
+            "name": "about_section_eyebrow",
+            "type": "text",
+            "instructions": "Small text displayed above the title.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent": "group_block_about-section",
+            "menu_order": 0
+        },
+        {
+            "key": "field_about_section_title",
+            "label": "Title",
+            "name": "about_section_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent": "group_block_about-section",
+            "menu_order": 1
+        },
+        {
+            "key": "field_about_section_content",
+            "label": "Content",
+            "name": "about_section_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0,
+            "parent": "group_block_about-section",
+            "menu_order": 2
+        },
+        {
+            "key": "field_about_section_link",
+            "label": "Button",
+            "name": "about_section_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "parent": "group_block_about-section",
+            "menu_order": 3
+        },
+        {
+            "key": "field_about_section_image",
+            "label": "Image",
+            "name": "about_section_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "parent": "group_block_about-section",
+            "menu_order": 4
+        },
+        {
+            "key": "field_about_section_section_tab",
+            "label": "Section settings",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0,
+            "open": 0,
+            "multi_expand": 1,
+            "menu_order": 5,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_section_background_color",
+            "label": "Background color",
+            "name": "section_background_color",
+            "type": "color_picker",
+            "instructions": "Select a background color for this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "return_format": "string",
+            "enable_opacity": 0,
+            "menu_order": 6,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_block_id",
+            "label": "Block ID",
+            "name": "block_id",
+            "type": "text",
+            "instructions": "Optional HTML id attribute for anchor links, e.g. contact-section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "menu_order": 7,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_spacing_tab",
+            "label": "Spacing settings",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0,
+            "open": 0,
+            "multi_expand": 1,
+            "menu_order": 8,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_section_gap_top",
+            "label": "Gap top",
+            "name": "section_gap_top",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "xs": "XS",
+                "sm": "SM",
+                "md": "MD",
+                "lg": "LG",
+                "xl": "XL"
+            },
+            "default_value": "none",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "menu_order": 9,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_section_gap_bottom",
+            "label": "Gap bottom",
+            "name": "section_gap_bottom",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "xs": "XS",
+                "sm": "SM",
+                "md": "MD",
+                "lg": "LG",
+                "xl": "XL"
+            },
+            "default_value": "none",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "menu_order": 10,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_section_space_top",
+            "label": "Space top",
+            "name": "section_space_top",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "xs": "XS",
+                "sm": "SM",
+                "md": "MD",
+                "lg": "LG",
+                "xl": "XL"
+            },
+            "default_value": "md",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "menu_order": 11,
+            "parent": "group_block_about-section"
+        },
+        {
+            "key": "field_about_section_section_space_bottom",
+            "label": "Space bottom",
+            "name": "section_space_bottom",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "none": "None",
+                "xs": "XS",
+                "sm": "SM",
+                "md": "MD",
+                "lg": "LG",
+                "xl": "XL"
+            },
+            "default_value": "md",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "menu_order": 12,
+            "parent": "group_block_about-section"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/about-section"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Generated for the About Section block.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1780900710,
+    "wco_metadata": {
+        "block_name": "about-section",
+        "icon": "star-filled",
+        "category": "wco-blocks",
+        "text_domain": "speedshot"
+    },
+    "_valid": true
+}

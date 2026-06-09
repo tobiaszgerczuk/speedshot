@@ -11,7 +11,7 @@
 	background-position: bottom;
 	background-repeat: no-repeat;
 	padding: 10rem 0 8rem;
-	color: #000;
+	color: $color-black;
 	text-align: center;
 
 	// Gradient z bieli do przezroczystości
@@ -19,7 +19,7 @@
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+		background: linear-gradient(to bottom, $color-white 0%, rgba($color-white, 0) 100%);
 		z-index: 1;
 	}
 
@@ -83,7 +83,7 @@
 .archive-hero,
 .single-post__hero {
   padding: 10rem 0 3rem;
-  background: linear-gradient(180deg, var(--color-surface) 0%, rgba(247, 243, 235, 0) 100%);
+  background: linear-gradient(180deg, rgba($color-primary, 0.1) 0%, rgba($color-primary, 0) 100%);
 }
 
 .archive-hero__eyebrow,

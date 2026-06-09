@@ -1,0 +1,64 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="block-attractions-section__decor block-attractions-section__decor--one" aria-hidden="true"></div>
+  <div class="block-attractions-section__decor block-attractions-section__decor--two" aria-hidden="true"></div>
+
+  <div class="block-attractions-section__header" data-reveal="up" data-reveal-duration="760">
+    {% if fields['attractions_section_eyebrow'] %}
+      <p class="block-attractions-section__eyebrow">{{ fields['attractions_section_eyebrow'] }}</p>
+    {% endif %}
+
+    <div class="block-attractions-section__heading">
+      <h2 class="block-attractions-section__title">{{ fields['attractions_section_title'] ?: 'Nasze atrakcje' }}</h2>
+
+      {% if fields['attractions_section_content'] %}
+        <div class="block-attractions-section__intro">
+          {{ fields['attractions_section_content']|raw }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if attractions_groups %}
+    <div class="block-attractions-section__groups">
+      {% for group in attractions_groups %}
+        <section class="block-attractions-section__group" data-reveal="up" data-reveal-delay="{{ loop.index0 * 80 }}" data-reveal-duration="760">
+          <div class="block-attractions-section__group-header">
+            <span class="block-attractions-section__group-kicker">{{ group.title }}</span>
+            <span class="block-attractions-section__group-count">{{ group.cards|length }} atrakcji</span>
+          </div>
+
+          <div class="block-attractions-section__grid">
+            {% for card in group.cards %}
+              <a class="block-attractions-section__card" href="{{ card.url }}">
+                {% include 'components/icon.twig' with {
+                  name: card.icon,
+                  class: 'block-attractions-section__icon'
+                } only %}
+
+                <span class="block-attractions-section__card-copy">
+                  <span class="block-attractions-section__card-title">{{ card.title }}</span>
+                  <span class="block-attractions-section__card-text">{{ card.description }}</span>
+                </span>
+
+                {% include 'components/button-icon.twig' with {
+                  name: 'arrow-up-right'
+                } only %}
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  {% elseif is_preview %}
+    <p class="block-attractions-section__placeholder">Nie znaleziono pozycji menu Atrakcje.</p>
+  {% endif %}
+
+  {% if fields['attractions_section_link'] %}
+    <div class="block-attractions-section__footer">
+      {% include 'components/button.twig' with {
+        link: fields['attractions_section_link'],
+        class: 'block-attractions-section__button'
+      } only %}
+    </div>
+  {% endif %}
+</section>

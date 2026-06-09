@@ -21,22 +21,34 @@
         description: 'Blok opakowujący z zagnieżdżonymi blokami i wyborem szerokości kontenera.',
         panelTitle: 'Ustawienia kontenera',
         fieldLabel: 'Szerokość kontenera',
+        spacingPanelTitle: 'Paddingi i marginesy',
+        marginTop: 'Margines górny',
+        marginBottom: 'Margines dolny',
+        paddingTop: 'Padding górny',
+        paddingBottom: 'Padding dolny',
         default: 'Domyślna',
         wide: 'Szeroka',
         medium: 'Średnia',
         narrow: 'Wąska',
         full: 'Pełna szerokość',
+        none: 'Brak',
       }
     : {
         title: 'Container Group',
         description: 'Wrapper block with nested blocks and configurable container width.',
         panelTitle: 'Container settings',
         fieldLabel: 'Container width',
+        spacingPanelTitle: 'Padding and margins',
+        marginTop: 'Margin top',
+        marginBottom: 'Margin bottom',
+        paddingTop: 'Padding top',
+        paddingBottom: 'Padding bottom',
         default: 'Default',
         wide: 'Wide',
         medium: 'Medium',
         narrow: 'Narrow',
         full: 'Full',
+        none: 'None',
       };
 
   const CONTAINER_WIDTH_OPTIONS = [
@@ -45,6 +57,15 @@
     { label: LABELS.medium, value: 'medium' },
     { label: LABELS.narrow, value: 'narrow' },
     { label: LABELS.full, value: 'full' },
+  ];
+
+  const SPACING_OPTIONS = [
+    { label: LABELS.none, value: 'none' },
+    { label: 'XS', value: 'xs' },
+    { label: 'SM', value: 'sm' },
+    { label: 'MD', value: 'md' },
+    { label: 'LG', value: 'lg' },
+    { label: 'XL', value: 'xl' },
   ];
 
   registerBlockType('acf/container-group', {
@@ -60,9 +81,31 @@
         type: 'string',
         default: 'default',
       },
+      sectionGapTop: {
+        type: 'string',
+        default: 'none',
+      },
+      sectionGapBottom: {
+        type: 'string',
+        default: 'none',
+      },
+      sectionSpaceTop: {
+        type: 'string',
+        default: 'md',
+      },
+      sectionSpaceBottom: {
+        type: 'string',
+        default: 'md',
+      },
     },
     edit({ attributes, setAttributes }) {
-      const { containerWidth } = attributes;
+      const {
+        containerWidth,
+        sectionGapTop,
+        sectionGapBottom,
+        sectionSpaceTop,
+        sectionSpaceBottom,
+      } = attributes;
       const blockProps = useBlockProps({ className: 'block-container-group' });
 
       return el(
@@ -83,6 +126,45 @@
               options: CONTAINER_WIDTH_OPTIONS,
               onChange(value) {
                 setAttributes({ containerWidth: value });
+              },
+            })
+          ),
+          el(
+            PanelBody,
+            {
+              title: LABELS.spacingPanelTitle,
+              initialOpen: false,
+            },
+            el(SelectControl, {
+              label: LABELS.marginTop,
+              value: sectionGapTop,
+              options: SPACING_OPTIONS,
+              onChange(value) {
+                setAttributes({ sectionGapTop: value });
+              },
+            }),
+            el(SelectControl, {
+              label: LABELS.marginBottom,
+              value: sectionGapBottom,
+              options: SPACING_OPTIONS,
+              onChange(value) {
+                setAttributes({ sectionGapBottom: value });
+              },
+            }),
+            el(SelectControl, {
+              label: LABELS.paddingTop,
+              value: sectionSpaceTop,
+              options: SPACING_OPTIONS,
+              onChange(value) {
+                setAttributes({ sectionSpaceTop: value });
+              },
+            }),
+            el(SelectControl, {
+              label: LABELS.paddingBottom,
+              value: sectionSpaceBottom,
+              options: SPACING_OPTIONS,
+              onChange(value) {
+                setAttributes({ sectionSpaceBottom: value });
               },
             })
           )

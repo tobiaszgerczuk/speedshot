@@ -110,7 +110,8 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "parent": "group_block_container-group"
+            "parent": "group_block_container-group",
+            "menu_order": 4
         },
         {
             "key": "field_container_group_spacing_tab",
@@ -129,7 +130,8 @@
             "endpoint": 0,
             "parent": "group_block_container-group",
             "open": 0,
-            "multi_expand": 1
+            "multi_expand": 1,
+            "menu_order": 5
         },
         {
             "key": "field_container_group_section_gap_top",

@@ -1,0 +1,11 @@
+{
+    "title": "Available Cities",
+    "description": "Grid with available city locations.",
+    "category": "wco-blocks",
+    "icon": "location-alt",
+    "keywords": [
+        "cities",
+        "locations",
+        "places"
+    ]
+}
