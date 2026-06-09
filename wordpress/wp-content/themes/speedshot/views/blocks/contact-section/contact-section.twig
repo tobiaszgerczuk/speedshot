@@ -39,18 +39,11 @@
       </aside>
 
       <div class="block-contact-section__form-card" data-reveal="up" data-reveal-delay="120" data-reveal-duration="760">
-        {% if contact_status == 'sent' %}
-          <div class="block-contact-section__notice block-contact-section__notice--success">
-            Dziękujemy, wiadomość została wysłana. Skontaktujemy się najszybciej jak to możliwe.
-          </div>
-        {% elseif contact_status == 'error' %}
-          <div class="block-contact-section__notice block-contact-section__notice--error">
-            Nie udało się wysłać formularza. Sprawdź wymagane pola i spróbuj ponownie.
-          </div>
-        {% endif %}
+        <div class="block-contact-section__notice" hidden></div>
 
         <form class="block-contact-section__form" action="{{ form_action }}" method="post">
           <input type="hidden" name="action" value="{{ form_action_name }}">
+          <input type="hidden" name="{{ recipient_field }}" value="{{ recipient_token }}">
           {{ function('wp_nonce_field', nonce_action, nonce_field, false, false) }}
           <label class="block-contact-section__honeypot">
             <span>Strona www</span>

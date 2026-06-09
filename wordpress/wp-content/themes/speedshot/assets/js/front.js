@@ -4,6 +4,7 @@ import Parallax from './components/parralax.js';
 import Reveal from './components/Reveal.js';
 import Header from './modules/header.js';
 import swipers from './modules/swipers.js';
+import initContactForms from './modules/contact-form.js';
 import WcoShop from './ecommerce/woocommerce.js';
 import {
   createIcons,
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Reveal();
   new WcoShop();
   initBlockModules();
+  initContactForms();
   createIcons({
     icons: {
       Car,

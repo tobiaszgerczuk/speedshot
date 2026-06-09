@@ -67,10 +67,11 @@ class Assets {
         $wooActive = class_exists('WooCommerce');
 
         wp_localize_script('speedshot-front', 'SPEEDSHOT', [
-            'restUrl' => esc_url_raw(rest_url('speedshot/v1')),
-            'nonce'   => wp_create_nonce('wp_rest'),
+            'restUrl'  => esc_url_raw(rest_url('speedshot/v1')),
+            'nonce'    => wp_create_nonce('wp_rest'),
+            'ajaxUrl'  => esc_url_raw(admin_url('admin-ajax.php')),
             'wooActive' => $wooActive,
-            'cartUrl' => $wooActive && function_exists('wc_get_cart_url') ? esc_url_raw(wc_get_cart_url()) : null,
+            'cartUrl'  => $wooActive && function_exists('wc_get_cart_url') ? esc_url_raw(wc_get_cart_url()) : null,
         ]);
     }
 

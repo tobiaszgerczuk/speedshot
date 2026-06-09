@@ -66,6 +66,27 @@
             "menu_order": 2
         },
         {
+            "key": "field_contact_section_recipient_email",
+            "label": "Recipient email",
+            "name": "contact_section_recipient_email",
+            "type": "text",
+            "instructions": "Email address that will receive form submissions. Defaults to info@centrumrozrywki-speedshot.pl if empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "info@centrumrozrywki-speedshot.pl",
+            "prepend": "",
+            "append": "",
+            "parent": "group_block_contact-section",
+            "menu_order": 3
+        },
+        {
             "key": "field_contact_section_section_tab",
             "label": "Section settings",
             "name": "",

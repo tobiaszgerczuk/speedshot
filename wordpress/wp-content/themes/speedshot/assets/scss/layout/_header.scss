@@ -231,6 +231,14 @@
     color: $color-primary-hover;
   }
 
+  &.is-menu-open {
+    color: $color-black;
+
+    .brand img {
+      filter: none;
+    }
+  }
+
   @include mobile {
     .hamburger {
       display: block;
@@ -271,6 +279,7 @@
       .menu-list {
         position: relative;
         z-index: 1;
+        width: 100%;
       }
 
       ul {
@@ -279,8 +288,9 @@
         flex-direction: column;
         padding: 0;
         border: 0;
-        gap: 6px;
+        gap: 0;
         align-items: stretch;
+        width: 100%;
         background: transparent;
         box-shadow: none;
         opacity: 1;
@@ -288,29 +298,60 @@
         transform: none;
       }
 
+      .menu-item {
+        width: 100%;
+      }
+
       .sub-menu {
         position: static;
-        display: flex;
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: transparent;
         min-width: 0;
         max-width: none;
-        margin: 2px 0 6px;
         padding: 0 0 0 14px;
-        border-left: 1px solid rgba($color-primary, 0.22);
+        margin: 0;
+        border: 0;
+        border-left: 2px solid rgba($color-primary, 0.18);
         border-radius: 0;
+        transition: max-height 0.3s ease, margin 0.25s ease;
 
         &::before {
           display: none;
         }
 
+        &.is-open {
+          max-height: 2000px;
+          margin: 4px 0 8px;
+        }
+
         .sub-menu {
-          margin-top: 4px;
           padding-left: 12px;
           border-left-color: rgba($color-accent, 0.32);
         }
       }
 
-      .menu-item-has-children > a::after {
+      .menu-close {
         display: none;
+      }
+
+      .menu-item-has-children > a {
+        &::after {
+          display: block;
+          margin-left: auto;
+          transform: rotate(45deg) translateY(-2px);
+          opacity: 0.55;
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .menu-item-has-children.is-open > a::after {
+        transform: rotate(-135deg) translateY(2px);
       }
     }
 
@@ -325,6 +366,7 @@
       font-size: 1.08rem;
       line-height: 1.25;
       white-space: normal;
+      text-align: left;
     }
 
     .primary-nav .sub-menu a {

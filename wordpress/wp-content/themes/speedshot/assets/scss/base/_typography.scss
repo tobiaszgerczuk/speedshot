@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as mix;
 
 @import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Signika:wght@300..700&display=swap');
 
@@ -29,5 +30,12 @@ a {
 
   &:hover {
     color: var(--color-primary-hover);
+  }
+}
+
+@include mix.mobile {
+  [class*="__title"],
+  [class*="__eyebrow"] {
+    max-width: 100% !important;
   }
 }

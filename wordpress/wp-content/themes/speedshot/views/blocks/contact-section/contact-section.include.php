@@ -18,10 +18,14 @@ $context['section_classes'] = SectionSettings::build_classes(
 );
 $context['section_id'] = SectionSettings::section_id($fields);
 $context['section_style'] = SectionSettings::inline_style($fields);
+$recipient = sanitize_email($fields['contact_section_recipient_email'] ?? '');
+
 $context['form_action'] = admin_url('admin-post.php');
 $context['form_action_name'] = ContactForm::action();
 $context['nonce_action'] = ContactForm::nonce_action();
 $context['nonce_field'] = ContactForm::nonce_field();
+$context['recipient_field'] = ContactForm::recipient_field();
+$context['recipient_token'] = ContactForm::encrypt_recipient($recipient);
 $context['contact_status'] = isset($_GET['contact_status']) ? sanitize_key(wp_unslash($_GET['contact_status'])) : '';
 $context['contact_details'] = [
     [
