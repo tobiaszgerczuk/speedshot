@@ -1,0 +1,141 @@
+@use "../../assets/scss/base/variables" as *;
+@use "../../assets/scss/base/mixins" as *;
+
+.block-how-we-work {
+  &__header {
+    max-width: 720px;
+    margin-bottom: 3.5rem;
+  }
+
+  &__eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    line-height: 1.1;
+  }
+
+  &__intro {
+    max-width: 58ch;
+    color: $color-muted;
+    font-size: 1.05rem;
+    line-height: 1.6;
+
+    p { color: inherit; margin: 0; }
+  }
+
+  &__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    counter-reset: steps;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+
+  &__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+    border-radius: $radius-lg;
+    background: $color-surface;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 12px 36px rgba($color-black, 0.08);
+      transform: translateY(-3px);
+    }
+
+    @include tablet {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+      border-radius: 0;
+      background: transparent;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid $color-border;
+
+      &:first-child {
+        border-top: 1px solid $color-border;
+      }
+
+      &:hover {
+        box-shadow: none;
+        transform: none;
+      }
+    }
+  }
+
+  // connector line between cards on desktop
+  &__steps:not(:has(.block-how-we-work__step:only-child)) {
+    .block-how-we-work__step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 3rem;
+      right: -1.2rem;
+      width: 1.4rem;
+      height: 2px;
+      background: linear-gradient(90deg, $color-border, rgba($color-primary, 0.5));
+
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  &__step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: $color-primary;
+    color: $color-white;
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: $font-family-accent;
+    line-height: 1;
+
+    @include tablet {
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 1.15rem;
+    }
+  }
+
+  &__step-body {
+    flex: 1;
+  }
+
+  &__step-title {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: $color-text;
+  }
+
+  &__step-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: $color-muted;
+  }
+}

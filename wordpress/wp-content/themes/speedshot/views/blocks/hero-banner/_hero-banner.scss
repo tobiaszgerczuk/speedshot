@@ -52,11 +52,7 @@
   }
 
   &__bottom-fade {
-    top: auto;
-    z-index: -1;
-    height: 34%;
-    background: linear-gradient(180deg, rgba($color-white, 0) 0%, rgba($color-white, 0.72) 58%, $color-white 100%);
-    pointer-events: none;
+    display: none;
   }
 
   &__container {

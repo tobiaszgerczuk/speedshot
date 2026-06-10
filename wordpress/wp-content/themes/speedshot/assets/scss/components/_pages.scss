@@ -1,38 +1,120 @@
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
 
-.subpage{
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 11rem 0 5rem;
+  color: $color-white;
+  background:
+    radial-gradient(circle at 10% 30%, rgba($color-primary, 0.28), transparent 40%),
+    linear-gradient(135deg, $color-black 0%, rgba($color-black, 0.78) 100%);
 
- 
-}
-.subpage-hero {
-	position: relative;
-	background-size: cover;
-	background-position: bottom;
-	background-repeat: no-repeat;
-	padding: 10rem 0 8rem;
-	color: $color-black;
-	text-align: center;
+  &--has-image {
+    background: $color-black;
+  }
 
-	// Gradient z bieli do przezroczystości
-	&__overlay {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(to bottom, $color-white 0%, rgba($color-white, 0) 100%);
-		z-index: 1;
-	}
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.32;
+  }
 
-	.container {
-		position: relative;
-		z-index: 2;
-	}
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(135deg, rgba($color-black, 0.78) 0%, rgba($color-black, 0.48) 60%, rgba($color-primary, 0.22) 100%),
+      radial-gradient(circle at 80% 20%, rgba($color-primary, 0.26), transparent 40%);
+  }
 
-	&__title {
-		font-size: 3rem;
-		font-weight: 700;
-		margin: 0;
-	}
+  &__shape {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    font-size: 9rem;
+
+    &--star {
+      top: -2rem;
+      right: 8%;
+      font-size: 14rem;
+      rotate: 22deg;
+    }
+
+    &--target {
+      bottom: -1rem;
+      right: 22%;
+      font-size: 8rem;
+      rotate: -15deg;
+    }
+
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba($color-white, 0.62);
+
+    a {
+      color: rgba($color-white, 0.62);
+      transition: color 0.18s ease;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    span[aria-hidden] {
+      opacity: 0.38;
+    }
+
+    span[aria-current] {
+      color: rgba($color-white, 0.9);
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.6rem;
+    color: $color-white;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    text-wrap: balance;
+    text-shadow: 0 8px 28px rgba($color-black, 0.3);
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 52ch;
+    color: rgba($color-white, 0.78);
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.55;
+  }
+
+  @include mobile {
+    padding: 9rem 0 3.5rem;
+
+    &__shape {
+      display: none;
+    }
+  }
 }
 
 .subpage-content {
@@ -259,5 +341,179 @@
   a {
     color: var(--color-primary);
     font-weight: 600;
+  }
+}
+
+// ─── Single Event ─────────────────────────────────────────────────────────────
+.single-event {
+
+  &__meta-bar {
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+    padding: 0.9rem 0;
+  }
+
+  &__meta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+  }
+
+  &__badge {
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: $color-primary;
+    color: $color-white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: $color-muted;
+    font-weight: 500;
+
+    svg { flex-shrink: 0; opacity: 0.7; }
+  }
+
+  &__body {
+    padding: 4rem 0 2rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: start;
+
+    @include laptop {
+      grid-template-columns: 1fr 320px;
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__content {
+    font-size: 1.05rem;
+    line-height: 1.75;
+
+    > * + * { margin-top: 1.25rem; }
+
+    h2, h3, h4 { margin-top: 2rem; }
+  }
+
+  // Sidebar registration card
+  &__sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  &__reg-card {
+    padding: 2rem;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    background: $color-white;
+    box-shadow: 0 8px 32px rgba($color-black, 0.06);
+
+    &--past {
+      background: $color-surface;
+      text-align: center;
+      color: $color-muted;
+      font-size: 1rem;
+    }
+  }
+
+  &__reg-title {
+    margin: 0 0 0.4rem;
+    font-size: 1.4rem;
+  }
+
+  &__reg-desc {
+    margin: 0 0 1.5rem;
+    font-size: 0.92rem;
+    color: $color-muted;
+  }
+
+  &__reg-notice {
+    padding: 0.85rem 1rem;
+    border-radius: $radius-md;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    &--success {
+      background: rgba($color-accent, 0.12);
+      color: darken($color-accent, 8%);
+    }
+
+    &--error {
+      background: rgba(#d93025, 0.08);
+      color: #c0392b;
+    }
+  }
+
+  &__reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $color-text;
+
+      em { color: $color-primary; font-style: normal; }
+
+      input, textarea {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        border: 1px solid $color-border;
+        border-radius: $radius-md;
+        font-size: 0.95rem;
+        font-family: inherit;
+        color: $color-text;
+        background: $color-white;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $color-primary;
+          box-shadow: 0 0 0 3px rgba($color-primary, 0.12);
+        }
+      }
+
+      textarea { resize: vertical; }
+    }
+  }
+
+  &__honeypot {
+    position: absolute !important;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__reg-submit {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   }
 }

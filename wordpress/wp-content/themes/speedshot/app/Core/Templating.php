@@ -34,6 +34,8 @@ class Templating
             $context['cart_url'] = function_exists('wc_get_cart_url') ? wc_get_cart_url() : null;
         }
 
+        $context['breadcrumbs'] = self::build_breadcrumbs();
+
         $globalSettings = Acf::get_global_settings();
         $context['global_settings'] = $globalSettings;
         $context['acf'] = array_merge($context['acf'] ?? [], [
@@ -66,6 +68,60 @@ class Templating
         
 
         return $twig;
+    }
+
+    private static function build_breadcrumbs(): array
+    {
+        $crumbs = [[
+            'label' => 'Strona główna',
+            'url'   => home_url('/'),
+        ]];
+
+        if (is_singular()) {
+            $post = get_post();
+
+            if ($post && $post->post_parent) {
+                $ancestors = array_reverse(get_post_ancestors($post->ID));
+                foreach ($ancestors as $ancestor_id) {
+                    $crumbs[] = [
+                        'label' => get_the_title($ancestor_id),
+                        'url'   => get_permalink($ancestor_id),
+                    ];
+                }
+            } elseif ($post && get_post_type($post) !== 'page') {
+                $post_type = get_post_type_object(get_post_type($post));
+                $archive_link = get_post_type_archive_link(get_post_type($post));
+                if ($post_type && $archive_link) {
+                    $crumbs[] = [
+                        'label' => $post_type->labels->name ?? $post_type->label,
+                        'url'   => $archive_link,
+                    ];
+                }
+            }
+
+            $crumbs[] = [
+                'label' => get_the_title(),
+                'url'   => '',
+            ];
+        } elseif (is_archive()) {
+            $post_type = get_post_type_object(get_queried_object()->name ?? '');
+            $crumbs[] = [
+                'label' => $post_type ? ($post_type->labels->name ?? $post_type->label) : get_the_archive_title(),
+                'url'   => '',
+            ];
+        } elseif (is_search()) {
+            $crumbs[] = [
+                'label' => 'Wyniki wyszukiwania: ' . get_search_query(),
+                'url'   => '',
+            ];
+        } elseif (is_404()) {
+            $crumbs[] = [
+                'label' => 'Strona nie znaleziona',
+                'url'   => '',
+            ];
+        }
+
+        return $crumbs;
     }
 
     private static function manifest(): array

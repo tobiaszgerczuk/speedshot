@@ -1,0 +1,113 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<article class="single-event">
+
+  {# Hero #}
+  {% set hero_image = post.thumbnail.src %}
+  {% set hero_subtitle = post.excerpt %}
+  {% include "partials/page-hero.twig" %}
+
+  {# Meta strip #}
+  {% if event.date or event.location or event.badge %}
+    <div class="single-event__meta-bar">
+      <div class="container single-event__meta-inner">
+        {% if event.badge %}
+          <span class="single-event__badge">{{ event.badge }}</span>
+        {% endif %}
+        {% if event.date %}
+          <span class="single-event__meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            {{ event.weekday }}{% if event.weekday and event.date %}, {% endif %}{{ event.date }}
+            {% if event.time_start %}
+              · {{ event.time_start }}{% if event.time_end %} – {{ event.time_end }}{% endif %}
+            {% endif %}
+          </span>
+        {% endif %}
+        {% if event.location %}
+          <span class="single-event__meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            {{ event.location }}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Content + registration #}
+  <div class="single-event__body">
+    <div class="container single-event__grid">
+
+      {# Left: content #}
+      <div class="single-event__content content">
+        {{ post.content }}
+      </div>
+
+      {# Right: registration form #}
+      <aside class="single-event__sidebar">
+        {% if event.is_past %}
+          <div class="single-event__reg-card single-event__reg-card--past">
+            <p>To wydarzenie już się odbyło.</p>
+          </div>
+        {% else %}
+          <div class="single-event__reg-card" id="zapis">
+            <h2 class="single-event__reg-title">Zapisz się</h2>
+            <p class="single-event__reg-desc">Wypełnij formularz, a potwierdzimy Twój udział.</p>
+
+            <div class="single-event__reg-notice" hidden></div>
+
+            <form class="single-event__reg-form" data-event-reg-form>
+              <input type="hidden" name="action"   value="{{ reg_ajax_action }}">
+              <input type="hidden" name="event_id" value="{{ event.id }}">
+              <input type="hidden" name="{{ reg_nonce_field }}" value="{{ function('wp_create_nonce', reg_nonce_action) }}">
+              <label class="single-event__honeypot">
+                <span>Strona www</span>
+                <input type="text" name="website" tabindex="-1" autocomplete="off">
+              </label>
+
+              <label>
+                <span>Imię i nazwisko <em>*</em></span>
+                <input type="text" name="name" required autocomplete="name">
+              </label>
+
+              <label>
+                <span>Email <em>*</em></span>
+                <input type="email" name="email" required autocomplete="email">
+              </label>
+
+              <label>
+                <span>Telefon <em>*</em></span>
+                <input type="tel" name="phone" required autocomplete="tel">
+              </label>
+
+              <label>
+                <span>Liczba osób</span>
+                <input type="number" name="people" min="1" value="1">
+              </label>
+
+              <label>
+                <span>Wiadomość</span>
+                <textarea name="message" rows="3"></textarea>
+              </label>
+
+              <button class="single-event__reg-submit btn btn--primary" type="submit">
+                Zapisuję się
+              </button>
+            </form>
+          </div>
+        {% endif %}
+      </aside>
+
+    </div>
+  </div>
+
+  <div class="single-post__footer">
+    <div class="container-medium">
+      <div class="single-post__back">
+        <a href="{{ function('get_post_type_archive_link', 'event') ?: function('home_url', '/') }}">← Wróć do wydarzeń</a>
+      </div>
+    </div>
+  </div>
+
+</article>
+{% endblock %}

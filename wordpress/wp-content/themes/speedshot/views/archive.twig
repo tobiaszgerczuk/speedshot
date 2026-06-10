@@ -1,16 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <section class="archive-hero">
-    <div class="container">
-      <span class="archive-hero__eyebrow">{{ __('Archive', 'speedshot') }}</span>
-      <h1 class="archive-hero__title">{{ archive_title }}</h1>
-
-      {% if archive_description %}
-        <div class="archive-hero__description">{{ archive_description|raw }}</div>
-      {% endif %}
-    </div>
-  </section>
+  {% set hero_title = archive_title %}
+  {% set hero_subtitle = archive_description|striptags %}
+  {% include "partials/page-hero.twig" %}
 
   <section class="archive-listing">
     <div class="container">
@@ -27,7 +20,7 @@
                     class: 'post-card__media-image'
                   })|raw }}
                 {% else %}
-                  <span class="post-card__placeholder">{{ __('No image', 'speedshot') }}</span>
+                  <span class="post-card__placeholder">Brak zdjęcia</span>
                 {% endif %}
               </a>
 
@@ -45,16 +38,16 @@
 
                 <p class="post-card__excerpt">{{ post.preview.length(28) }}</p>
 
-                <a class="post-card__link" href="{{ post.link }}">{{ __('Read more', 'speedshot') }}</a>
+                <a class="post-card__link" href="{{ post.link }}">Czytaj więcej</a>
               </div>
             </article>
           {% endfor %}
         </div>
 
         {% if posts.pagination.pages %}
-          <nav class="pagination" aria-label="{{ __('Posts navigation', 'speedshot') }}">
+          <nav class="pagination" aria-label="Nawigacja wpisów">
             {% if posts.pagination.prev %}
-              <a class="pagination__link pagination__link--prev" href="{{ posts.pagination.prev.link }}">{{ __('Previous', 'speedshot') }}</a>
+              <a class="pagination__link pagination__link--prev" href="{{ posts.pagination.prev.link }}">Poprzednia</a>
             {% endif %}
 
             {% for page in posts.pagination.pages %}
@@ -66,14 +59,14 @@
             {% endfor %}
 
             {% if posts.pagination.next %}
-              <a class="pagination__link pagination__link--next" href="{{ posts.pagination.next.link }}">{{ __('Next', 'speedshot') }}</a>
+              <a class="pagination__link pagination__link--next" href="{{ posts.pagination.next.link }}">Następna</a>
             {% endif %}
           </nav>
         {% endif %}
       {% else %}
         <div class="empty-state">
-          <h2>{{ __('No posts found.', 'speedshot') }}</h2>
-          <p>{{ __('There is nothing to display here yet.', 'speedshot') }}</p>
+          <h2>Brak wpisów.</h2>
+          <p>Tutaj jeszcze nic nie ma.</p>
         </div>
       {% endif %}
     </div>

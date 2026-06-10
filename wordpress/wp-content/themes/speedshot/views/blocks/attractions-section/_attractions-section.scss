@@ -85,11 +85,6 @@
     }
   }
 
-  &__groups {
-    display: grid;
-    gap: clamp(1.75rem, 4vw, 3rem);
-  }
-
   &__group {
     position: relative;
     padding: clamp(1rem, 2.5vw, 1.5rem);
@@ -97,44 +92,6 @@
     border-radius: 8px;
     background: linear-gradient(180deg, rgba($color-white, 0.96), rgba($color-surface, 0.76));
     box-shadow: 0 18px 52px rgba($color-black, 0.06);
-  }
-
-  &__group-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  &__group-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: $color-black;
-    font-size: clamp(1.2rem, 2vw, 1.55rem);
-    font-weight: 800;
-    line-height: 1;
-
-    &::before {
-      content: "";
-      width: 0.7rem;
-      aspect-ratio: 1;
-      border-radius: 999px;
-      background: $color-primary;
-      box-shadow: 0 0 0 0.35rem rgba($color-primary, 0.12);
-    }
-  }
-
-  &__group-count {
-    display: inline-flex;
-    flex: 0 0 auto;
-    padding: 0.35rem 0.65rem;
-    border-radius: $radius-sm;
-    background: rgba($color-accent, 0.1);
-    color: $color-accent;
-    font-size: 0.88rem;
-    font-weight: 800;
   }
 
   &__grid {
@@ -248,10 +205,5 @@
     text-align: center;
   }
 
-  @include mobile {
-    &__group-header {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-  }
 }
+

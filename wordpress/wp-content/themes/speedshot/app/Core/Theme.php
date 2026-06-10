@@ -6,6 +6,7 @@ use Timber\Timber;
 use Speedshot\Theme\Core\Acf;
 use Speedshot\Theme\Core\Assets;
 use Speedshot\Theme\Core\ContactForm;
+use Speedshot\Theme\Core\EventRegistration;
 use Speedshot\Theme\Core\Media;
 use Speedshot\Theme\Core\PostTypes;
 use Speedshot\Theme\Core\Templating;
@@ -36,6 +37,9 @@ class Theme
 
         // Contact form
         ContactForm::boot();
+
+        // Event registrations
+        EventRegistration::boot();
 
         // Custom post types
         PostTypes::boot();

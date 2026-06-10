@@ -1,0 +1,25 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+
+    <div class="block-how-we-work__header" data-reveal="up" data-reveal-duration="700">
+      <p class="block-how-we-work__eyebrow">{{ fields['how_we_work_eyebrow'] ?: 'Współpraca' }}</p>
+      <h2 class="block-how-we-work__title">{{ fields['how_we_work_title'] ?: 'Jak z nami współpracować?' }}</h2>
+      {% if fields['how_we_work_content'] %}
+        <div class="block-how-we-work__intro">{{ fields['how_we_work_content']|raw }}</div>
+      {% endif %}
+    </div>
+
+    <ol class="block-how-we-work__steps">
+      {% for step in steps %}
+        <li class="block-how-we-work__step" data-reveal="up" data-reveal-delay="{{ loop.index0 * 100 }}" data-reveal-duration="700">
+          <div class="block-how-we-work__step-number" aria-hidden="true">{{ loop.index }}</div>
+          <div class="block-how-we-work__step-body">
+            <h3 class="block-how-we-work__step-title">{{ step.title }}</h3>
+            <p class="block-how-we-work__step-text">{{ step.text }}</p>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+
+  </div>
+</section>

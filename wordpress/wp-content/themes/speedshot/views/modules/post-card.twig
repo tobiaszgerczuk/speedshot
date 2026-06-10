@@ -8,7 +8,7 @@
         alt: post.image_alt ?: post.title
       })|raw }}
     {% else %}
-      <span class="post-card__placeholder">{{ placeholder|default('No image') }}</span>
+      <span class="post-card__placeholder">{{ placeholder|default('Brak zdjęcia') }}</span>
     {% endif %}
   </a>
 
@@ -33,7 +33,7 @@
     {% endif %}
 
     <a class="post-card__link" href="{{ post.permalink }}">
-      {{ read_more_label|default('Read more') }}
+      {{ read_more_label|default('Czytaj więcej') }}
     </a>
   </div>
 </article>

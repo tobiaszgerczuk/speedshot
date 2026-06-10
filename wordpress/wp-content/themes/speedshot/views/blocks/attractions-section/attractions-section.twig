@@ -18,36 +18,28 @@
     </div>
   </div>
 
-  {% if attractions_groups %}
-    <div class="block-attractions-section__groups">
-      {% for group in attractions_groups %}
-        <section class="block-attractions-section__group" data-reveal="up" data-reveal-delay="{{ loop.index0 * 80 }}" data-reveal-duration="760">
-          <div class="block-attractions-section__group-header">
-            <span class="block-attractions-section__group-kicker">{{ group.title }}</span>
-            <span class="block-attractions-section__group-count">{{ group.cards|length }} atrakcji</span>
-          </div>
+  {% if attractions %}
+    <div class="block-attractions-section__group" data-reveal="up" data-reveal-duration="760">
+    <div class="block-attractions-section__grid">
+      {% for card in attractions %}
+        <a class="block-attractions-section__card" href="{{ card.url }}"
+           data-reveal="up" data-reveal-delay="{{ loop.index0 * 40 }}" data-reveal-duration="600">
+          {% include 'components/icon.twig' with {
+            name: card.icon,
+            class: 'block-attractions-section__icon'
+          } only %}
 
-          <div class="block-attractions-section__grid">
-            {% for card in group.cards %}
-              <a class="block-attractions-section__card" href="{{ card.url }}">
-                {% include 'components/icon.twig' with {
-                  name: card.icon,
-                  class: 'block-attractions-section__icon'
-                } only %}
+          <span class="block-attractions-section__card-copy">
+            <span class="block-attractions-section__card-title">{{ card.title }}</span>
+            <span class="block-attractions-section__card-text">{{ card.description }}</span>
+          </span>
 
-                <span class="block-attractions-section__card-copy">
-                  <span class="block-attractions-section__card-title">{{ card.title }}</span>
-                  <span class="block-attractions-section__card-text">{{ card.description }}</span>
-                </span>
-
-                {% include 'components/button-icon.twig' with {
-                  name: 'arrow-up-right'
-                } only %}
-              </a>
-            {% endfor %}
-          </div>
-        </section>
+          {% include 'components/button-icon.twig' with {
+            name: 'arrow-up-right'
+          } only %}
+        </a>
       {% endfor %}
+    </div>
     </div>
   {% elseif is_preview %}
     <p class="block-attractions-section__placeholder">Nie znaleziono pozycji menu Atrakcje.</p>

@@ -2,24 +2,15 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<article class="subpage">
+  <article class="subpage">
 
-		{# 🔹 Hero sekcja dla podstron #}
-		<section class="subpage-hero" style="
-			{% if post.thumbnail %}
-				background-image: url('{{ post.thumbnail.src }}');
-			{% endif %}
-		">
-			<div class="subpage-hero__overlay"></div>
-			<div class="container">
-				<h1 class="subpage-hero__title" data-reveal="fade" data-reveal-duration="700">{{ post.title }}</h1>
-			</div>
-		</section>
+    {% set hero_image = post.thumbnail.src %}
+    {% set hero_subtitle = post.excerpt %}
+    {% include "partials/page-hero.twig" %}
 
-		{# 🔹 Główna treść podstrony #}
-		<section class="subpage-content">
-			{{ post.content }}
-		</section>
+    <section class="subpage-content">
+      {{ post.content }}
+    </section>
 
-	</article>
+  </article>
 {% endblock %}

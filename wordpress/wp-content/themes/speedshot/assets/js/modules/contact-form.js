@@ -2,28 +2,52 @@ export default function initContactForms() {
   document.querySelectorAll('.block-contact-section__form').forEach((form) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      handleSubmit(form);
+      handleSubmit(form, {
+        noticeSelector: '.block-contact-section__notice',
+        btnSelector: '.block-contact-section__submit',
+        resetOnSuccess: true,
+      });
+    });
+  });
+
+  document.querySelectorAll('[data-event-reg-form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      handleSubmit(form, {
+        noticeSelector: '.single-event__reg-notice',
+        btnSelector: '.single-event__reg-submit',
+        resetOnSuccess: true,
+        onSuccess: () => { form.style.display = 'none'; },
+      });
     });
   });
 }
 
-async function handleSubmit(form) {
-  const btn = form.querySelector('.block-contact-section__submit');
-  const notice = form.closest('.block-contact-section__form-card').querySelector('.block-contact-section__notice');
+async function handleSubmit(form, opts = {}) {
+  const {
+    noticeSelector = '.block-contact-section__notice',
+    btnSelector    = '.block-contact-section__submit',
+    resetOnSuccess = true,
+    onSuccess      = null,
+  } = opts;
+
+  const btn    = form.querySelector(btnSelector);
+  const card   = form.closest('[class*="__form-card"], [class*="__reg-card"], form') ?? form.parentElement;
+  const notice = card.querySelector(noticeSelector) ?? form.previousElementSibling;
 
   setLoading(form, btn, true);
   clearNotice(notice);
 
   const data = new FormData(form);
-  data.set('action', 'speedshot_contact_submit');
 
   try {
-    const res = await fetch(SPEEDSHOT.ajaxUrl, { method: 'POST', body: data });
+    const res  = await fetch(SPEEDSHOT.ajaxUrl, { method: 'POST', body: data });
     const json = await res.json();
 
     if (json.success) {
       showNotice(notice, json.data.message, 'success');
-      form.reset();
+      if (resetOnSuccess) form.reset();
+      if (onSuccess) onSuccess();
     } else {
       showNotice(notice, json.data?.message ?? 'Wystąpił błąd. Spróbuj ponownie.', 'error');
     }

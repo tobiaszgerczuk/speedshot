@@ -1,0 +1,29 @@
+<section class="page-hero{% if hero_image %} page-hero--has-image{% endif %}">
+  {% if hero_image %}
+    <div class="page-hero__bg" style="background-image: url('{{ hero_image }}')"></div>
+  {% endif %}
+  <div class="page-hero__overlay" aria-hidden="true"></div>
+  <span class="page-hero__shape page-hero__shape--star" aria-hidden="true">★</span>
+  <span class="page-hero__shape page-hero__shape--target" aria-hidden="true">◎</span>
+
+  <div class="container page-hero__inner">
+    {% if breadcrumbs %}
+      <nav class="page-hero__breadcrumbs" aria-label="Breadcrumb">
+        {% for crumb in breadcrumbs %}
+          {% if not loop.last %}
+            <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+            <span aria-hidden="true">/</span>
+          {% else %}
+            <span aria-current="page">{{ crumb.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    {% endif %}
+
+    <h1 class="page-hero__title" data-reveal="up" data-reveal-duration="700">{{ hero_title ?: post.title }}</h1>
+
+    {% if hero_subtitle %}
+      <p class="page-hero__subtitle" data-reveal="up" data-reveal-delay="80" data-reveal-duration="700">{{ hero_subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
