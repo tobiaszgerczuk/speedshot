@@ -10,10 +10,9 @@
     z-index: -4;
     width: 100vw;
     background:
-      radial-gradient(circle at 12% 16%, rgba(#ffd45a, 0.36), transparent 20rem),
-      radial-gradient(circle at 88% 18%, rgba($color-primary, 0.34), transparent 24rem),
-      radial-gradient(circle at 86% 82%, rgba($color-accent, 0.45), transparent 30rem),
-      linear-gradient(135deg, #102326 0%, #176f6b 44%, #ef8a10 100%);
+      radial-gradient(circle at 14% 30%, rgba($color-primary, 0.22), transparent 26rem),
+      radial-gradient(circle at 85% 65%, rgba($color-accent, 0.14), transparent 28rem),
+      linear-gradient(150deg, #0d1f3c 0%, #132d4a 50%, #0e2238 100%);
     transform: translateX(-50%);
   }
 

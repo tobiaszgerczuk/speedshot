@@ -43,12 +43,12 @@
         {
           "slug": "primary",
           "name": "Primary",
-          "color": "#e47b02"
+          "color": "#1b3a6b"
         },
         {
           "slug": "primary-hover",
           "name": "Primary Hover",
-          "color": "#bf6300"
+          "color": "#122850"
         },
         {
           "slug": "secondary",
@@ -58,7 +58,7 @@
         {
           "slug": "accent",
           "name": "Accent",
-          "color": "#168c88"
+          "color": "#2a7ab5"
         },
         {
           "slug": "black",
