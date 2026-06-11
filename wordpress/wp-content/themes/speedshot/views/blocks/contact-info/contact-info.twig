@@ -1,0 +1,39 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %}
+  class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+
+    <div class="block-contact-info__grid">
+
+      {# Phone #}
+      <a href="tel:{{ phone|replace({' ':''}) }}" class="block-contact-info__card" data-reveal="up" data-reveal-delay="0">
+        <span class="block-contact-info__icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        <span class="block-contact-info__label">Telefon</span>
+        <span class="block-contact-info__value">{{ phone }}</span>
+        <span class="block-contact-info__hint">Zadzwoń lub napisz SMS</span>
+      </a>
+
+      {# Email #}
+      <a href="mailto:{{ email }}" class="block-contact-info__card" data-reveal="up" data-reveal-delay="80">
+        <span class="block-contact-info__icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <span class="block-contact-info__label">E-mail</span>
+        <span class="block-contact-info__value">{{ email }}</span>
+        <span class="block-contact-info__hint">{{ response }}</span>
+      </a>
+
+      {# Area #}
+      <div class="block-contact-info__card block-contact-info__card--static" data-reveal="up" data-reveal-delay="160">
+        <span class="block-contact-info__icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="block-contact-info__label">Zasięg</span>
+        <span class="block-contact-info__value">Cała Polska</span>
+        <span class="block-contact-info__hint">{{ area }}</span>
+      </div>
+
+    </div>
+  </div>
+</section>

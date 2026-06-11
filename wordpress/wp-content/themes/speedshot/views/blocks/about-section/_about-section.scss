@@ -89,6 +89,7 @@
     min-height: clamp(320px, 42vw, 520px);
     border-radius: 8px;
     box-shadow: 0 24px 60px rgba($color-black, 0.14);
+    max-height: 400px;
   }
 
   &__image {

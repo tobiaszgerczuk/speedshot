@@ -5,7 +5,7 @@
   <article class="subpage">
 
     {% set hero_image = post.thumbnail.src %}
-    {% set hero_subtitle = post.excerpt %}
+    {% set hero_subtitle = post.excerpt({'read_more': 'Czytaj więcej'}) %}
     {% include "partials/page-hero.twig" %}
 
     <section class="subpage-content">

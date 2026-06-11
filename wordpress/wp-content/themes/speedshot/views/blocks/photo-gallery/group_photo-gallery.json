@@ -1,0 +1,59 @@
+{
+    "key": "group_block_photo-gallery",
+    "title": "Photo Gallery Block",
+    "description": "Generated for the Photo Gallery block.",
+    "fields": [
+        {
+            "key": "field_photo_gallery_images",
+            "label": "Zdjęcia",
+            "name": "photo_gallery_images",
+            "type": "gallery",
+            "instructions": "Dodaj zdjęcia do galerii.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "return_format": "array",
+            "preview_size": "medium",
+            "insert": "append",
+            "library": "all",
+            "min": 0,
+            "max": 0,
+            "parent": "group_block_photo-gallery",
+            "menu_order": 0
+        },
+        {
+            "key": "field_photo_gallery_columns",
+            "label": "Kolumny",
+            "name": "photo_gallery_columns",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "choices": {
+                "2": "2 kolumny",
+                "3": "3 kolumny",
+                "4": "4 kolumny"
+            },
+            "default_value": "3",
+            "return_format": "value",
+            "parent": "group_block_photo-gallery",
+            "menu_order": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/photo-gallery"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

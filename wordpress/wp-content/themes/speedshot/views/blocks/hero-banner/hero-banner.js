@@ -11,7 +11,12 @@ export default class HeroBanner {
   }
 
   init() {
-    if (this.slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    if (this.slides.length === 1) {
+      this.slides[0].classList.add('is-single');
       return;
     }
 

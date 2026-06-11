@@ -56,6 +56,19 @@ class Theme
         // REST API
         RestApi::boot();
 
+        // Polish "Read More" in auto-generated excerpts
+        add_filter('excerpt_more', static fn () => '&hellip; <a class="more-link" href="">Czytaj więcej</a>');
+
+        // Remove WP core layout block support — the theme manages its own container
+        // widths via .container CSS class. Without this, WP generates unique
+        // .wp-container-core-group-is-layout-* selectors with max-width constraints
+        // for every constrained group block, polluting the DOM and <head>.
+        add_action('init', static function (): void {
+            remove_filter('render_block', 'wp_render_layout_support_flag', 10);
+            remove_filter('render_block', 'wp_restore_group_inner_container', 10);
+            remove_filter('render_block', 'wp_layout_block_disable_padding_aware_alignments', 10);
+        });
+
     }
 
     

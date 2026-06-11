@@ -1,0 +1,40 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+
+    <div class="block-for-whom__header" data-reveal="up" data-reveal-duration="700">
+      <p class="block-for-whom__eyebrow">{{ fields['for_whom_eyebrow'] ?: 'Dla kogo' }}</p>
+      <h2 class="block-for-whom__title">{{ fields['for_whom_title'] ?: 'Atrakcje dla każdej grupy' }}</h2>
+    </div>
+
+    <div class="block-for-whom__grid">
+      {% for panel in panels %}
+        <div class="block-for-whom__panel block-for-whom__panel--{{ panel.modifier }}"
+             data-reveal="up" data-reveal-delay="{{ loop.index0 * 120 }}" data-reveal-duration="700">
+
+          <div class="block-for-whom__panel-top">
+            <span class="block-for-whom__panel-icon">
+              {% if panel.icon == 'users' %}
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              {% else %}
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {% endif %}
+            </span>
+            <h3 class="block-for-whom__panel-audience">{{ panel.audience }}</h3>
+            <p class="block-for-whom__panel-lead">{{ panel.lead }}</p>
+          </div>
+
+          <ul class="block-for-whom__panel-list">
+            {% for item in panel.items %}
+              <li class="block-for-whom__panel-item">
+                <span class="block-for-whom__panel-dot" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

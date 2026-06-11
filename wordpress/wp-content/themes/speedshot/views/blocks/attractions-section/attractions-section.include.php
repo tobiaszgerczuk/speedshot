@@ -66,21 +66,54 @@ foreach ($allItems as $item) {
     }
 }
 
-// Zbierz bezpośrednie dzieci "Atrakcje" jako karty
+// Zbierz atrakcje — obsługuje zarówno płaską strukturę jak i grupowaną (CZĘŚĆ 1/2)
 $attractions = [];
 if ($attractionsId) {
+    // Zbierz bezpośrednie dzieci "Atrakcje"
+    $directChildren = [];
     foreach ($allItems as $item) {
-        if ((int) $item->menu_item_parent !== $attractionsId) {
-            continue;
+        if ((int) $item->menu_item_parent === $attractionsId) {
+            $directChildren[] = $item;
         }
-        $title = wp_strip_all_tags($item->title);
-        $key   = mb_strtolower($title);
-        $attractions[] = [
-            'title'       => $title,
-            'url'         => $item->url,
-            'icon'        => $iconMap[$key]        ?? 'sparkles',
-            'description' => $descriptionMap[$key] ?? 'Mobilna atrakcja dopasowana do wydarzeń dla dzieci, szkół i grup.',
-        ];
+    }
+
+    // Sprawdź czy którekolwiek dziecko ma własne dzieci (struktura grupowana)
+    $directChildIds = array_map(fn($i) => (int) $i->ID, $directChildren);
+    $hasGrandchildren = false;
+    foreach ($allItems as $item) {
+        if (in_array((int) $item->menu_item_parent, $directChildIds, true)) {
+            $hasGrandchildren = true;
+            break;
+        }
+    }
+
+    if ($hasGrandchildren) {
+        // Struktura grupowana: zbierz wnuki (dzieci grup CZĘŚĆ 1/2)
+        foreach ($allItems as $item) {
+            if (!in_array((int) $item->menu_item_parent, $directChildIds, true)) {
+                continue;
+            }
+            $title = wp_strip_all_tags($item->title);
+            $key   = mb_strtolower($title);
+            $attractions[] = [
+                'title'       => $title,
+                'url'         => $item->url,
+                'icon'        => $iconMap[$key]        ?? 'sparkles',
+                'description' => $descriptionMap[$key] ?? 'Mobilna atrakcja dopasowana do wydarzeń dla dzieci, szkół i grup.',
+            ];
+        }
+    } else {
+        // Struktura płaska: bezpośrednie dzieci to atrakcje
+        foreach ($directChildren as $item) {
+            $title = wp_strip_all_tags($item->title);
+            $key   = mb_strtolower($title);
+            $attractions[] = [
+                'title'       => $title,
+                'url'         => $item->url,
+                'icon'        => $iconMap[$key]        ?? 'sparkles',
+                'description' => $descriptionMap[$key] ?? 'Mobilna atrakcja dopasowana do wydarzeń dla dzieci, szkół i grup.',
+            ];
+        }
     }
 }
 

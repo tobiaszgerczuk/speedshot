@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
 
@@ -29,8 +30,7 @@
     inset: 0;
     z-index: -1;
     background:
-      linear-gradient(135deg, rgba($color-black, 0.78) 0%, rgba($color-black, 0.48) 60%, rgba($color-primary, 0.22) 100%),
-      radial-gradient(circle at 80% 20%, rgba($color-primary, 0.26), transparent 40%);
+      linear-gradient(135deg, rgba(#0d1f3c, 0.92) 0%, rgba(#1b3a6b, 0.72) 60%, rgba(#1b3a6b, 0.45) 100%);
   }
 
   &__shape {
@@ -102,7 +102,6 @@
 
   &__subtitle {
     margin: 0;
-    max-width: 52ch;
     color: rgba($color-white, 0.78);
     font-size: clamp(1rem, 1.6vw, 1.2rem);
     line-height: 1.55;
@@ -452,7 +451,7 @@
 
     &--success {
       background: rgba($color-accent, 0.12);
-      color: darken($color-accent, 8%);
+      color: color.adjust($color-accent, $lightness: -8%);
     }
 
     &--error {

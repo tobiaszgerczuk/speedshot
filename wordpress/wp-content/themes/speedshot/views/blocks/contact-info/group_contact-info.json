@@ -1,0 +1,63 @@
+{
+    "key": "group_block_contact-info",
+    "title": "Contact Info Block",
+    "fields": [
+        {
+            "key": "field_contact_info_phone",
+            "label": "Telefon",
+            "name": "contact_info_phone",
+            "type": "text",
+            "default_value": "+48 536 304 931",
+            "placeholder": "+48 000 000 000",
+            "wrapper": { "width": "50" },
+            "parent": "group_block_contact-info",
+            "menu_order": 0
+        },
+        {
+            "key": "field_contact_info_email",
+            "label": "E-mail",
+            "name": "contact_info_email",
+            "type": "text",
+            "default_value": "info@centrumrozrywki-speedshot.pl",
+            "placeholder": "kontakt@firma.pl",
+            "wrapper": { "width": "50" },
+            "parent": "group_block_contact-info",
+            "menu_order": 1
+        },
+        {
+            "key": "field_contact_info_response",
+            "label": "Podpis e-mail (hint)",
+            "name": "contact_info_response",
+            "type": "text",
+            "default_value": "Odpowiadamy zwykle w ciągu kilku godzin w dni robocze",
+            "wrapper": { "width": "100" },
+            "parent": "group_block_contact-info",
+            "menu_order": 2
+        },
+        {
+            "key": "field_contact_info_area",
+            "label": "Zasięg (hint)",
+            "name": "contact_info_area",
+            "type": "text",
+            "default_value": "Dojeżdżamy do Ciebie na terenie całej Polski",
+            "wrapper": { "width": "100" },
+            "parent": "group_block_contact-info",
+            "menu_order": 3
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/contact-info"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

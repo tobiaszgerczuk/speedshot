@@ -1,0 +1,289 @@
+.block-featured-attractions {
+
+  &__header {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    margin: 0 0 0.9rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: $radius-sm;
+    background: rgba($color-primary, 0.08);
+    color: $color-primary;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.55fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__title {
+    max-width: 14ch;
+    margin: 0;
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  &__intro {
+    margin: 0;
+    color: $color-muted;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.65;
+  }
+
+  // === GRID ===
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // === CARD ===
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba($color-black, 0.08);
+    border-radius: $radius-lg;
+    background: $color-white;
+    color: $color-black;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      transform $transition-fast,
+      border-color $transition-fast,
+      box-shadow $transition-fast;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($color-primary, 0.3);
+      box-shadow: 0 20px 52px rgba($color-black, 0.09);
+      transform: translateY(-4px);
+      color: $color-black;
+    }
+
+    // Pierwsza karta — navy
+    &:first-child {
+      background: linear-gradient(160deg, #0d1f3c 0%, #1b3a6b 100%);
+      border-color: transparent;
+      color: $color-white;
+
+      &:hover,
+      &:focus-visible {
+        border-color: rgba($color-white, 0.15);
+        box-shadow: 0 20px 52px rgba(#000, 0.3);
+      }
+
+      .block-featured-attractions__eyebrow {
+        background: rgba($color-white, 0.12);
+        color: rgba($color-white, 0.85);
+      }
+
+      .block-featured-attractions__number {
+        color: rgba($color-white, 0.35);
+      }
+
+      .block-featured-attractions__card-title {
+        color: $color-white;
+      }
+
+      .block-featured-attractions__card-desc {
+        color: rgba($color-white, 0.72);
+      }
+
+      .block-featured-attractions__card-footer {
+        border-top-color: rgba($color-white, 0.12);
+      }
+
+      .block-featured-attractions__tag {
+        background: rgba($color-white, 0.12);
+        color: rgba($color-white, 0.85);
+      }
+
+      .block-featured-attractions__cta {
+        color: rgba($color-white, 0.55);
+      }
+
+      &:hover .block-featured-attractions__cta {
+        color: $color-white;
+      }
+
+      .block-featured-attractions__image {
+        background-color: rgba($color-white, 0.06);
+      }
+
+      .block-featured-attractions__image-icon {
+        color: rgba($color-white, 0.22);
+      }
+
+      .block-featured-attractions__badge {
+        background: $color-accent;
+        box-shadow: 0 4px 14px rgba($color-accent, 0.45);
+      }
+    }
+  }
+
+  // === IMAGE ===
+
+  &__image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: rgba($color-primary, 0.08);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+   
+  }
+
+  &__image-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: rgba($color-primary, 0.28);
+
+  
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  // === BADGE ===
+
+  &__badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: $color-primary;
+    color: $color-white;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba($color-primary, 0.4);
+  }
+
+  // === CARD BODY ===
+
+  &__card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  &__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__number {
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: rgba($color-black, 0.22);
+
+   
+  }
+
+  &__card-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: $color-black;
+
+   
+  }
+
+  &__card-desc {
+    flex: 1;
+    margin: 0;
+    color: $color-muted;
+    font-size: 0.96rem;
+    line-height: 1.6;
+
+   
+  }
+
+  &__card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba($color-black, 0.07);
+
+   
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__tag {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba($color-primary, 0.08);
+    color: $color-primary;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+
+  
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    color: $color-muted;
+    font-size: 0.88rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: color $transition-fast, gap $transition-fast;
+
+    .block-featured-attractions__card:hover & {
+      color: $color-primary;
+      gap: 0.65rem;
+    }
+
+  
+  
+  }
+}

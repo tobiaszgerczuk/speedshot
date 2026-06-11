@@ -1,0 +1,111 @@
+.block-contact-info {
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(1rem, 3vw, 2rem);
+  padding-top: 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+    }
+  }
+
+  // === CARD ===
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid rgba($color-primary, 0.1);
+    border-radius: $radius-lg;
+    background: $color-white;
+    color: $color-black;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
+
+    // accent bar top
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, $color-primary, $color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    &:not(&--static):hover,
+    &:not(&--static):focus-visible {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba($color-primary, 0.1);
+      border-color: rgba($color-primary, 0.2);
+      color: $color-black;
+
+      &::before { transform: scaleX(1); }
+
+      .block-contact-info__icon {
+        background: $color-primary;
+        color: $color-white;
+      }
+
+      .block-contact-info__value {
+        color: $color-primary;
+      }
+    }
+
+    &--static {
+      cursor: default;
+    }
+  }
+
+  // === ICON ===
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
+    border-radius: $radius-md;
+    background: rgba($color-primary, 0.07);
+    color: $color-primary;
+    transition: background $transition-fast, color $transition-fast;
+
+    svg { width: 1.35rem; height: 1.35rem; }
+  }
+
+  // === TEXT ===
+
+  &__label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: $color-accent;
+  }
+
+  &__value {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: $color-black;
+    transition: color $transition-fast;
+    word-break: break-all;
+  }
+
+  &__hint {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: $color-muted;
+    line-height: 1.5;
+  }
+}

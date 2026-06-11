@@ -1,0 +1,160 @@
+{
+    "key": "group_block_featured-attractions",
+    "title": "Featured Attractions Block",
+    "description": "Generated for the Featured Attractions block.",
+    "fields": [
+        {
+            "key": "field_featured_attractions_eyebrow",
+            "label": "Eyebrow",
+            "name": "featured_attractions_eyebrow",
+            "type": "text",
+            "instructions": "Małe oznaczenie nad tytułem, np. \"Na plener\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Na plener",
+            "placeholder": "",
+            "parent": "group_block_featured-attractions",
+            "menu_order": 0
+        },
+        {
+            "key": "field_featured_attractions_title",
+            "label": "Tytuł sekcji",
+            "name": "featured_attractions_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Najpopularniejsze atrakcje plenerowe",
+            "placeholder": "",
+            "parent": "group_block_featured-attractions",
+            "menu_order": 1
+        },
+        {
+            "key": "field_featured_attractions_intro",
+            "label": "Opis sekcji",
+            "name": "featured_attractions_intro",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Sprawdzone hity, które sprawdzają się na festynach, piknikach i eventach firmowych w całej Polsce.",
+            "rows": 2,
+            "placeholder": "",
+            "parent": "group_block_featured-attractions",
+            "menu_order": 2
+        },
+        {
+            "key": "field_featured_attractions_items",
+            "label": "Atrakcje",
+            "name": "featured_attractions_items",
+            "type": "repeater",
+            "instructions": "Zostaw puste aby użyć domyślnych atrakcji.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "collapsed": "field_featured_attractions_item_title",
+            "min": 0,
+            "max": 3,
+            "layout": "block",
+            "button_label": "Dodaj atrakcję",
+            "sub_fields": [
+                {
+                    "key": "field_featured_attractions_item_title",
+                    "label": "Nazwa atrakcji",
+                    "name": "title",
+                    "type": "text",
+                    "required": 1,
+                    "wrapper": { "width": "70", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 0
+                },
+                {
+                    "key": "field_featured_attractions_item_badge",
+                    "label": "Badge (np. Nowość)",
+                    "name": "badge",
+                    "type": "text",
+                    "required": 0,
+                    "wrapper": { "width": "30", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "Nowość",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 1
+                },
+                {
+                    "key": "field_featured_attractions_item_description",
+                    "label": "Opis",
+                    "name": "description",
+                    "type": "textarea",
+                    "required": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "rows": 3,
+                    "placeholder": "",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 2
+                },
+                {
+                    "key": "field_featured_attractions_item_image",
+                    "label": "Zdjęcie",
+                    "name": "image",
+                    "type": "image",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 3
+                },
+                {
+                    "key": "field_featured_attractions_item_url",
+                    "label": "Link (URL)",
+                    "name": "url",
+                    "type": "url",
+                    "required": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "/atrakcje/",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 4
+                },
+                {
+                    "key": "field_featured_attractions_item_tags",
+                    "label": "Tagi (po przecinku)",
+                    "name": "tags_raw",
+                    "type": "text",
+                    "required": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "placeholder": "Dla dorosłych, Dla dzieci, Plener",
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 5
+                }
+            ],
+            "parent": "group_block_featured-attractions",
+            "menu_order": 3
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/featured-attractions"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true
+}

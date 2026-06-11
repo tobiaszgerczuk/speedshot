@@ -1,0 +1,63 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+
+    <div class="block-featured-attractions__header" data-reveal="up" data-reveal-duration="700">
+      <p class="block-featured-attractions__eyebrow">{{ fields['featured_attractions_eyebrow'] ?: 'Na plener' }}</p>
+      <div class="block-featured-attractions__heading">
+        <h2 class="block-featured-attractions__title">{{ fields['featured_attractions_title'] ?: 'Najpopularniejsze atrakcje plenerowe' }}</h2>
+        <p class="block-featured-attractions__intro">{{ fields['featured_attractions_intro'] ?: 'Sprawdzone hity, które sprawdzają się na festynach, piknikach i eventach firmowych w całej Polsce.' }}</p>
+      </div>
+    </div>
+
+    <div class="block-featured-attractions__grid">
+      {% for item in attractions %}
+        <a class="block-featured-attractions__card" href="{{ item.url }}"
+           data-reveal="up" data-reveal-delay="{{ loop.index0 * 100 }}" data-reveal-duration="680">
+
+          {# Zdjęcie / placeholder #}
+          <div class="block-featured-attractions__image"
+               {% if item.image %}style="background-image: url('{{ item.image }}')"{% endif %}>
+            {% if not item.image %}
+              <span class="block-featured-attractions__image-icon">
+                {% if item.icon == 'crosshair' %}
+                  <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+                {% elseif item.icon == 'car' %}
+                  <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1L2 11v5h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+                {% else %}
+                  <svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                {% endif %}
+              </span>
+            {% endif %}
+            {% if item.badge %}
+              <span class="block-featured-attractions__badge">{{ item.badge }}</span>
+            {% endif %}
+          </div>
+
+          {# Treść #}
+          <div class="block-featured-attractions__card-body">
+            <div class="block-featured-attractions__card-top">
+              <span class="block-featured-attractions__number">{{ item.number }}</span>
+            </div>
+
+            <h3 class="block-featured-attractions__card-title">{{ item.title }}</h3>
+            <p class="block-featured-attractions__card-desc">{{ item.description }}</p>
+
+            <div class="block-featured-attractions__card-footer">
+              <ul class="block-featured-attractions__tags">
+                {% for tag in item.tags %}
+                  <li class="block-featured-attractions__tag">{{ tag }}</li>
+                {% endfor %}
+              </ul>
+              <span class="block-featured-attractions__cta">
+                Dowiedz się więcej
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </div>
+          </div>
+
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

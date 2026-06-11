@@ -19,16 +19,16 @@ $context['section_style'] = SectionSettings::inline_style($fields);
 
 $default_steps = [
     [
-        'title' => 'Sprawdź ofertę i skontaktuj się z nami',
-        'text'  => 'Zerknij na nasze atrakcje i zadzwoń do nas. Nie musisz martwić się wyborem — nasi doradcy podpowiedzą, jakie gry warto wykorzystać na Twoim wydarzeniu.',
+        'title' => 'Wyślij zapytanie lub zadzwoń',
+        'text'  => 'Opisz wydarzenie — rodzaj, termin, miejsce i liczbę uczestników. Odpowiemy szybko z propozycją dopasowaną do charakteru imprezy i grupy.',
     ],
     [
-        'title' => 'Wybierzmy wspólnie termin i miejsce',
-        'text'  => 'Wszystko dopasowujemy do Ciebie i naszej dostępności. Dbamy o to, by każda atrakcja była dopasowana do Waszych wymagań, warunków i miejsca.',
+        'title' => 'Ustalamy program i szczegóły',
+        'text'  => 'Dobieramy atrakcje odpowiednie dla Twojej grupy — wiekowej, tematycznej, budżetowej. Zajmujemy się całą logistyką: transport sprzętu, obsada, harmonogram.',
     ],
     [
-        'title' => 'Spotkajmy się i bawmy wyśmienicie',
-        'text'  => 'Chcemy przez nasze spotkania integrować, bawić i rozwijać ludzi. Każda atrakcja to nowoczesny sprzęt obsługiwany zawsze pod okiem doświadczonego opiekuna.',
+        'title' => 'Przyjeżdżamy i realizujemy',
+        'text'  => 'Nasz zespół stawia się na miejscu z pełnym sprzętem i prowadzi program od początku do końca. Ty możesz skupić się na gościach — resztą zajmujemy się my.',
     ],
 ];
 
