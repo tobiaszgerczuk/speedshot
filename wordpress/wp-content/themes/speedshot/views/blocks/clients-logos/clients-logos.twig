@@ -1,0 +1,24 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+    <div class="block-clients-logos__header" data-reveal="up" data-reveal-duration="700">
+      <p class="block-clients-logos__eyebrow">{{ fields['clients_logos_eyebrow'] ?: 'Zaufali nam' }}</p>
+      <h2 class="block-clients-logos__title">{{ fields['clients_logos_title'] ?: 'Klienci, z którymi współpracowaliśmy' }}</h2>
+    </div>
+  </div>
+
+  {% if logos %}
+    <div class="block-clients-logos__marquee" data-reveal="up" data-reveal-duration="700">
+      <div class="block-clients-logos__track">
+        {% for group in 0..1 %}
+          <div class="block-clients-logos__group"{% if group == 1 %} aria-hidden="true"{% endif %}>
+            {% for logo in logos %}
+              <div class="block-clients-logos__item">
+                <img src="{{ logo.url }}" alt="{{ logo.alt }}" loading="eager" decoding="async">
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>

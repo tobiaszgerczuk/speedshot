@@ -1,0 +1,75 @@
+{
+    "key": "group_block_clients-logos",
+    "title": "Clients Logos Block",
+    "description": "Generated for the Clients Logos block.",
+    "fields": [
+        {
+            "key": "field_clients_logos_eyebrow",
+            "label": "Eyebrow",
+            "name": "clients_logos_eyebrow",
+            "type": "text",
+            "instructions": "Małe oznaczenie nad tytułem, np. \"Zaufali nam\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Zaufali nam",
+            "placeholder": "",
+            "parent": "group_block_clients-logos",
+            "menu_order": 0
+        },
+        {
+            "key": "field_clients_logos_title",
+            "label": "Tytuł sekcji",
+            "name": "clients_logos_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "Klienci, z którymi współpracowaliśmy",
+            "placeholder": "",
+            "parent": "group_block_clients-logos",
+            "menu_order": 1
+        },
+        {
+            "key": "field_clients_logos_images",
+            "label": "Loga klientów",
+            "name": "clients_logos_images",
+            "type": "gallery",
+            "instructions": "Jeśli puste, użyte zostaną loga z galerii na stronie O nas.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "return_format": "id",
+            "library": "all",
+            "min": "",
+            "max": "",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "insert": "append",
+            "parent": "group_block_clients-logos",
+            "menu_order": 2
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/clients-logos"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true
+}

@@ -82,65 +82,6 @@
       color: $color-black;
     }
 
-    // Pierwsza karta — navy
-    &:first-child {
-      background: linear-gradient(160deg, #0d1f3c 0%, #1b3a6b 100%);
-      border-color: transparent;
-      color: $color-white;
-
-      &:hover,
-      &:focus-visible {
-        border-color: rgba($color-white, 0.15);
-        box-shadow: 0 20px 52px rgba(#000, 0.3);
-      }
-
-      .block-featured-attractions__eyebrow {
-        background: rgba($color-white, 0.12);
-        color: rgba($color-white, 0.85);
-      }
-
-      .block-featured-attractions__number {
-        color: rgba($color-white, 0.35);
-      }
-
-      .block-featured-attractions__card-title {
-        color: $color-white;
-      }
-
-      .block-featured-attractions__card-desc {
-        color: rgba($color-white, 0.72);
-      }
-
-      .block-featured-attractions__card-footer {
-        border-top-color: rgba($color-white, 0.12);
-      }
-
-      .block-featured-attractions__tag {
-        background: rgba($color-white, 0.12);
-        color: rgba($color-white, 0.85);
-      }
-
-      .block-featured-attractions__cta {
-        color: rgba($color-white, 0.55);
-      }
-
-      &:hover .block-featured-attractions__cta {
-        color: $color-white;
-      }
-
-      .block-featured-attractions__image {
-        background-color: rgba($color-white, 0.06);
-      }
-
-      .block-featured-attractions__image-icon {
-        color: rgba($color-white, 0.22);
-      }
-
-      .block-featured-attractions__badge {
-        background: $color-accent;
-        box-shadow: 0 4px 14px rgba($color-accent, 0.45);
-      }
-    }
   }
 
   // === IMAGE ===
