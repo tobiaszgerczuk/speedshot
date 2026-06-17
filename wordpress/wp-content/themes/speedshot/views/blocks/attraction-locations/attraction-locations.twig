@@ -1,0 +1,18 @@
+<div{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  {% if locations_title %}
+    <h3 class="block-attraction-locations__title">{{ locations_title }}</h3>
+  {% endif %}
+
+  {% if locations %}
+    <ul class="block-attraction-locations__list">
+      {% for loc in locations %}
+        <li class="block-attraction-locations__item">
+          <span class="block-attraction-locations__icon" aria-hidden="true">{{ loc.svg|raw }}</span>
+          <span class="block-attraction-locations__label">{{ loc.label }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% elseif is_preview %}
+    <p class="block-attraction-locations__placeholder">Wybierz lokalizacje w ustawieniach bloku.</p>
+  {% endif %}
+</div>

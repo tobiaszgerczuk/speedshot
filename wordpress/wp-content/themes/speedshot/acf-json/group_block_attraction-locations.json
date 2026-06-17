@@ -1,0 +1,82 @@
+{
+    "key": "group_block_attraction-locations",
+    "title": "Attraction Locations Block",
+    "fields": [
+        {
+            "key": "field_attraction_locations_title",
+            "label": "Nagłówek",
+            "name": "attraction_locations_title",
+            "aria-label": "",
+            "type": "text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Zabawę możemy zorganizować:",
+            "maxlength": "",
+            "placeholder": "Zabawę możemy zorganizować:",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_attraction_locations_items",
+            "label": "Lokalizacje",
+            "name": "attraction_locations_items",
+            "aria-label": "",
+            "type": "checkbox",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "park-las": "Park lub las",
+                "boisko": "Boisko",
+                "boisko-trawiaste": "Boisko trawiaste",
+                "plac": "Plac",
+                "sala-sportowa": "Sala sportowa",
+                "sala": "Sala",
+                "mala-sala": "Mała sala",
+                "plaza": "Plaża",
+                "plener": "Każde miejsce w plenerze"
+            },
+            "default_value": [],
+            "return_format": "value",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "layout": "vertical",
+            "toggle": 0,
+            "choices_position": "vertical"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/attraction-locations"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Generated for the Attraction Locations block.",
+    "show_in_rest": 0,
+    "modified": 1781913600,
+    "wco_metadata": {
+        "block_name": "attraction-locations",
+        "icon": "location-alt",
+        "category": "wco-blocks",
+        "text_domain": "speedshot"
+    }
+}

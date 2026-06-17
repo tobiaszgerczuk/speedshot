@@ -1,0 +1,7 @@
+.block-attraction-locations{margin:1.5rem 0 0}
+.block-attraction-locations__title{margin:0 0 .85rem;font-size:1.25rem;font-weight:700}
+.block-attraction-locations__list{list-style:none;display:flex;flex-wrap:wrap;gap:.85rem 1.75rem;padding:0;margin:0}
+.block-attraction-locations__item{display:inline-flex;align-items:center;gap:.55rem;font-weight:500}
+.block-attraction-locations__icon{display:inline-flex;flex:0 0 auto;color:var(--color-accent,#2a7ab5)}
+.block-attraction-locations__icon svg{display:block}
+.block-attraction-locations__placeholder{margin:0;color:var(--color-muted);font-style:italic}

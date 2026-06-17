@@ -1,0 +1,17 @@
+{
+    "title": "Atrakcja — lokalizacje",
+    "description": "Lista miejsc, w których można zorganizować atrakcję, z ikonami.",
+    "category": "wco-blocks",
+    "icon": "location-alt",
+    "keywords": [
+        "lokalizacje",
+        "atrakcja",
+        "miejsca",
+        "ikony"
+    ],
+    "mode": "preview",
+    "supports": {
+        "align": false,
+        "anchor": true
+    }
+}
