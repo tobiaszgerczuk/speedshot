@@ -113,6 +113,28 @@
                     "menu_order": 3
                 },
                 {
+                    "key": "field_featured_attractions_item_image_position",
+                    "label": "Kadrowanie zdjęcia (pion)",
+                    "name": "image_position",
+                    "type": "select",
+                    "instructions": "Jak wykadrować zdjęcie w pionie, gdy nie mieści się w całości.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "choices": {
+                        "top": "Do góry",
+                        "center": "Do środka",
+                        "bottom": "Do dołu"
+                    },
+                    "default_value": "center",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "parent": "field_featured_attractions_items",
+                    "menu_order": 4
+                },
+                {
                     "key": "field_featured_attractions_item_url",
                     "label": "Link (URL)",
                     "name": "url",
@@ -122,7 +144,7 @@
                     "default_value": "",
                     "placeholder": "/atrakcje/",
                     "parent": "field_featured_attractions_items",
-                    "menu_order": 4
+                    "menu_order": 5
                 },
                 {
                     "key": "field_featured_attractions_item_tags",
@@ -134,7 +156,7 @@
                     "default_value": "",
                     "placeholder": "Dla dorosłych, Dla dzieci, Plener",
                     "parent": "field_featured_attractions_items",
-                    "menu_order": 5
+                    "menu_order": 6
                 }
             ],
             "parent": "group_block_featured-attractions",

@@ -35,6 +35,7 @@ $iconMap = [
     'laserowa strzelnica'                                => 'target',
     'turniej fifa/fc'                                    => 'gamepad-2',
     'tor małych mistrzów'                                => 'medal',
+    'robo pies'                                          => 'sparkles',
     // pozycje spoza listy klienta (zostawione)
     'piłka wodna łódkami zdalnie sterowanymi'            => 'sailboat',
     'symulator lotu samolotem i rajdu samochodowego'     => 'plane',
@@ -59,6 +60,7 @@ $descriptionMap = [
     'laserowa strzelnica'                                => 'Celność, refleks i sportowe emocje w bezpiecznej formie.',
     'turniej fifa/fc'                                    => 'Esportowy turniej z prostą organizacją i zdrową rywalizacją.',
     'tor małych mistrzów'                                => 'Sportowo-rekreacyjny tor przeszkód dla najmłodszych.',
+    'robo pies'                                          => 'Pokazy i warsztaty z czworonożnym robotem Unitree Go2.',
     // pozycje spoza listy klienta (zostawione)
     'piłka wodna łódkami zdalnie sterowanymi'            => 'Sterowane łódki, bramki i wodna rywalizacja.',
     'symulator lotu samolotem i rajdu samochodowego'     => 'Emocje pilota i kierowcy rajdowego w jednym stanowisku.',

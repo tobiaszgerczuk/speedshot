@@ -39,6 +39,24 @@
             "return_format": "value",
             "parent": "group_block_photo-gallery",
             "menu_order": 1
+        },
+        {
+            "key": "field_photo_gallery_fit",
+            "label": "Dopasowanie zdjęć",
+            "name": "photo_gallery_fit",
+            "type": "select",
+            "instructions": "Wypełnienie (cover) przycina zdjęcie do kafelka. Zmieszczenie (contain) pokazuje całe zdjęcie bez przycinania.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "choices": {
+                "cover": "Wypełnij kafelek (cover)",
+                "contain": "Zmieść całe zdjęcie (contain)"
+            },
+            "default_value": "cover",
+            "return_format": "value",
+            "parent": "group_block_photo-gallery",
+            "menu_order": 2
         }
     ],
     "location": [

@@ -4,6 +4,10 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+      - --performance-schema=OFF
+      - --innodb-buffer-pool-size=64M
+      - --innodb-log-buffer-size=4M
+      - --mysqlx=OFF
     environment:
       MYSQL_ROOT_PASSWORD: ${PROJECT_NAME}_password
       MYSQL_DATABASE: ${PROJECT_NAME}_db
@@ -42,11 +46,11 @@ services:
       - traefik.enable=true
       - traefik.docker.network=web
       - traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.localhost`)
-      - traefik.http.routers.${PROJECT_NAME}.entrypoints=web
+      - traefik.http.routers.${PROJECT_NAME}.entrypoints=http
       - traefik.http.routers.${PROJECT_NAME}.middlewares=${PROJECT_NAME}-redirect-to-https
       - traefik.http.routers.${PROJECT_NAME}.service=${PROJECT_NAME}
       - traefik.http.routers.${PROJECT_NAME}-secure.rule=Host(`${PROJECT_NAME}.localhost`)
-      - traefik.http.routers.${PROJECT_NAME}-secure.entrypoints=websecure
+      - traefik.http.routers.${PROJECT_NAME}-secure.entrypoints=https
       - traefik.http.routers.${PROJECT_NAME}-secure.tls=true
       - traefik.http.routers.${PROJECT_NAME}-secure.service=${PROJECT_NAME}
       - traefik.http.middlewares.${PROJECT_NAME}-redirect-to-https.redirectscheme.scheme=https
@@ -68,11 +72,11 @@ services:
       - traefik.enable=true
       - traefik.docker.network=web
       - traefik.http.routers.${PROJECT_NAME}-pma.rule=Host(`pma.${PROJECT_NAME}.localhost`)
-      - traefik.http.routers.${PROJECT_NAME}-pma.entrypoints=web
+      - traefik.http.routers.${PROJECT_NAME}-pma.entrypoints=http
       - traefik.http.routers.${PROJECT_NAME}-pma.middlewares=${PROJECT_NAME}-redirect-to-https
       - traefik.http.routers.${PROJECT_NAME}-pma.service=${PROJECT_NAME}-pma
       - traefik.http.routers.${PROJECT_NAME}-pma-secure.rule=Host(`pma.${PROJECT_NAME}.localhost`)
-      - traefik.http.routers.${PROJECT_NAME}-pma-secure.entrypoints=websecure
+      - traefik.http.routers.${PROJECT_NAME}-pma-secure.entrypoints=https
       - traefik.http.routers.${PROJECT_NAME}-pma-secure.tls=true
       - traefik.http.routers.${PROJECT_NAME}-pma-secure.service=${PROJECT_NAME}-pma
       - traefik.http.services.${PROJECT_NAME}-pma.loadbalancer.server.port=80

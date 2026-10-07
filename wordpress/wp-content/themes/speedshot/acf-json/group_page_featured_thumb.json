@@ -1,0 +1,45 @@
+{
+    "key": "group_page_featured_thumb",
+    "title": "Miniatura w sekcji polecanych",
+    "description": "Ustawienia zdjęcia tej strony, gdy jest pokazywane automatycznie w sekcji „Najpopularniejsze atrakcje plenerowe”.",
+    "fields": [
+        {
+            "key": "field_page_featured_thumb_position",
+            "label": "Kadrowanie miniatury (pion)",
+            "name": "featured_thumb_position",
+            "type": "select",
+            "instructions": "Jak wykadrować w pionie zdjęcie tej strony, gdy trafia do siatki polecanych atrakcji.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "choices": {
+                "top": "Do góry",
+                "center": "Do środka",
+                "bottom": "Do dołu"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0
+}

@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dokumentacja obsługi strony SpeedShot</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #fff;
+      --text: #202733;
+      --muted: #687383;
+      --line: #dce2e8;
+      --brand: #ed1c2e;
+      --brand-dark: #a90f1c;
+      --navy: #101c35;
+      --blue: #174e9d;
+      --code: #edf1f5;
+      --ok: #14734b;
+      --warn: #9a5a00;
+      --radius: 10px;
+      --shadow: 0 10px 30px rgba(16, 28, 53, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: var(--brand-dark); }
+    .layout { display: grid; grid-template-columns: 310px minmax(0, 1fr); min-height: 100vh; }
+    .layout > * { min-width: 0; }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 28px 22px;
+      color: #fff;
+      background: var(--navy);
+      border-right: 1px solid rgba(255, 255, 255, .1);
+    }
+    .brand { margin: 0 0 22px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+    .brand small { display: block; color: #aebbd0; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+    .brand strong { display: block; margin-top: 5px; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
+    .nav { display: grid; gap: 3px; }
+    .nav a { display: block; padding: 8px 10px; color: #dce5f2; text-decoration: none; border-radius: 7px; font-size: 14px; }
+    .nav a:hover, .nav a.is-active { color: #fff; background: rgba(237, 28, 46, .24); }
+    .content { width: 100%; max-width: 1160px; padding: 44px 48px 80px; }
+    .hero {
+      margin-bottom: 28px;
+      padding: 36px;
+      color: #fff;
+      background: linear-gradient(135deg, #101c35 0%, #174e9d 62%, #ed1c2e 100%);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero p { max-width: 820px; margin: 12px 0 0; color: #eef4ff; font-size: 17px; }
+    h1, h2, h3, h4 { line-height: 1.22; }
+    h1 { margin: 0; font-size: 35px; }
+    h2 { margin: 0 0 16px; font-size: 26px; }
+    h3 { margin: 27px 0 10px; font-size: 19px; }
+    h4 { margin: 20px 0 8px; font-size: 16px; }
+    section {
+      margin: 22px 0;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 14px rgba(16, 28, 53, .04);
+    }
+    p { margin: 0 0 12px; }
+    ul, ol { margin: 10px 0 16px 22px; padding: 0; }
+    li { margin: 6px 0; }
+    .lead { color: var(--muted); font-size: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { padding: 17px; border: 1px solid var(--line); border-radius: var(--radius); background: #fbfcfe; }
+    .card h3 { margin-top: 0; font-size: 17px; }
+    .note, .warning, .success {
+      margin: 16px 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--brand);
+      background: #fff4f5;
+      border-radius: 0 7px 7px 0;
+    }
+    .warning { border-left-color: var(--warn); background: #fff8e9; }
+    .success { border-left-color: var(--ok); background: #edf8f3; }
+    code, .path {
+      padding: 2px 5px;
+      background: var(--code);
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .92em;
+      overflow-wrap: anywhere;
+    }
+    pre { overflow: auto; padding: 15px; color: #f5f7fa; background: #101722; border-radius: var(--radius); font-size: 13px; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 14px; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border: 1px solid var(--line); }
+    th { color: #263246; background: #eff3f7; }
+    .tag { display: inline-block; margin: 2px 4px 2px 0; padding: 3px 8px; color: #fff; background: #34445b; border-radius: 999px; font-size: 12px; }
+    .muted { color: var(--muted); }
+    .steps { counter-reset: step; list-style: none; margin-left: 0; }
+    .steps > li { position: relative; min-height: 34px; padding-left: 42px; }
+    .steps > li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    @media (max-width: 940px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .content { padding: 26px 18px 54px; }
+      .grid { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media print {
+      body { background: #fff; font-size: 11pt; }
+      .layout { display: block; }
+      .sidebar { display: none; }
+      .content { max-width: none; padding: 0; }
+      .hero, section { box-shadow: none; break-inside: avoid; }
+      .hero { color: #000; background: #fff; border: 2px solid #111; }
+      .hero p { color: #333; }
+      a { color: #000; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <small>SpeedShot</small>
+        <strong>Dokumentacja administracyjna</strong>
+      </div>
+      <nav class="nav" aria-label="Spis treści">
+        <a href="#start">Start</a>
+        <a href="#pierwsze-kroki">Pierwsze kroki</a>
+        <a href="#mapa-panelu">Mapa panelu</a>
+        <a href="#strony">Strony i edytor</a>
+        <a href="#bloki">Bloki SpeedShot</a>
+        <a href="#menu">Menu i atrakcje</a>
+        <a href="#wydarzenia">Wydarzenia</a>
+        <a href="#zapisy">Zapisy na wydarzenia</a>
+        <a href="#inwestycje">Inwestycje</a>
+        <a href="#wpisy">Aktualności</a>
+        <a href="#formularz">Formularz kontaktowy</a>
+        <a href="#ustawienia">Ustawienia motywu</a>
+        <a href="#seo">SEO</a>
+        <a href="#media">Zdjęcia i pliki</a>
+        <a href="#stale">Treści wpisane na stałe</a>
+        <a href="#bezpieczenstwo">Bezpieczeństwo</a>
+        <a href="#techniczne">Informacje techniczne</a>
+        <a href="#checklista">Checklista</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="hero" id="start">
+        <h1>Dokumentacja obsługi strony SpeedShot</h1>
+        <p>Instrukcja dla osoby bez wiedzy technicznej: gdzie zmieniać teksty, zdjęcia, menu, atrakcje, wydarzenia, zapisy, formularz, ustawienia globalne oraz dane SEO.</p>
+      </header>
+
+      <section id="pierwsze-kroki">
+        <h2>Pierwsze kroki</h2>
+        <p>Strona działa na WordPressie. Większość codziennych zmian wykonuje się w panelu administracyjnym bez edycji kodu.</p>
+
+        <h3>Logowanie</h3>
+        <ol class="steps">
+          <li>Wejdź na adres strony z końcówką <code>/wp-admin</code>, np. <code>https://centrumrozrywki-speedshot.pl/wp-admin</code>.</li>
+          <li>Wpisz login lub adres e-mail oraz hasło.</li>
+          <li>Kliknij <strong>Zaloguj się</strong>.</li>
+          <li>Po zalogowaniu zobaczysz panel z menu po lewej stronie.</li>
+        </ol>
+        <p>Jeżeli nie pamiętasz hasła, użyj opcji <strong>Nie pamiętasz hasła?</strong>. Link do ustawienia nowego hasła zostanie wysłany na e-mail przypisany do konta.</p>
+
+        <h3>Najbezpieczniejszy sposób pracy</h3>
+        <ol>
+          <li>Otwórz edytowaną podstronę w osobnej karcie.</li>
+          <li>W panelu zmień jedną rzecz naraz.</li>
+          <li>Kliknij <strong>Zaktualizuj</strong> lub <strong>Zapisz zmiany</strong>.</li>
+          <li>Odśwież podstronę i sprawdź efekt na komputerze oraz telefonie.</li>
+          <li>Jeżeli efekt jest nieprawidłowy, cofnij ostatnią zmianę lub użyj wersji zapisanej przez WordPress.</li>
+        </ol>
+
+        <div class="warning">
+          Nie aktualizuj samodzielnie WordPressa, motywu ani wtyczek bez aktualnej kopii zapasowej. Zwykła edycja tekstów i zdjęć jest bezpieczna, ale aktualizacje techniczne mogą wpłynąć na działanie strony.
+        </div>
+
+        <h3>Podstawowe pojęcia</h3>
+        <table>
+          <thead><tr><th>Pojęcie</th><th>Co oznacza</th></tr></thead>
+          <tbody>
+            <tr><td>Strona</td><td>Stała podstrona, np. „O nas”, „Kontakt” albo opis atrakcji.</td></tr>
+            <tr><td>Wpis</td><td>Aktualność lub artykuł blogowy.</td></tr>
+            <tr><td>Blok</td><td>Fragment strony, np. baner, tekst ze zdjęciem, galeria lub FAQ.</td></tr>
+            <tr><td>Obrazek wyróżniający</td><td>Główne zdjęcie strony, wpisu, inwestycji albo wydarzenia.</td></tr>
+            <tr><td>Slug</td><td>Końcówka adresu, np. <code>kontakt</code> w adresie <code>/kontakt/</code>.</td></tr>
+            <tr><td>ACF</td><td>Dodatkowe pola i specjalne bloki przygotowane dla strony SpeedShot.</td></tr>
+            <tr><td>SEO</td><td>Ustawienia pomagające poprawnie prezentować stronę w Google.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="mapa-panelu">
+        <h2>Mapa panelu WordPress</h2>
+        <table>
+          <thead><tr><th>Pozycja w panelu</th><th>Co można tam edytować</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Strony</strong></td><td>Strona główna, kontakt, oferta, opisy atrakcji i pozostałe podstrony.</td></tr>
+            <tr><td><strong>Wpisy</strong></td><td>Aktualności i artykuły pokazywane m.in. w bloku „Latest Posts”.</td></tr>
+            <tr><td><strong>Media</strong></td><td>Zdjęcia, grafiki, pliki PDF i inne materiały.</td></tr>
+            <tr><td><strong>Wydarzenia</strong></td><td>Wydarzenia z datą, miejscem, opisem i formularzem zapisów.</td></tr>
+            <tr><td><strong>Zapisy</strong></td><td>Lista osób zapisanych na wydarzenia oraz eksport do CSV.</td></tr>
+            <tr><td><strong>Inwestycje</strong></td><td>Osobny typ treści: tytuł, opis i zdjęcie.</td></tr>
+            <tr><td><strong>Wygląd → Menu</strong></td><td>Menu główne oraz menu stopki.</td></tr>
+            <tr><td><strong>Ustawienia motywu</strong></td><td>Logo, social media, tracking, domyślne SEO i globalne bannery.</td></tr>
+            <tr><td><strong>Yoast SEO</strong></td><td>Ustawienia widoczności strony w wyszukiwarkach.</td></tr>
+            <tr><td><strong>WP Mail SMTP</strong></td><td>Konfiguracja wysyłania maili ze strony i test wiadomości.</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          Nazwy niektórych pól ACF są jeszcze po angielsku, np. <em>Title</em>, <em>Content</em>, <em>Link</em>. W dalszej części dokumentacji podano ich polskie znaczenie.
+        </div>
+      </section>
+
+      <section id="strony">
+        <h2>Strony i edytor blokowy</h2>
+        <p>Treść podstron jest budowana w edytorze WordPress z bloków. Każdy blok odpowiada za osobną sekcję widoczną na stronie.</p>
+
+        <h3>Jak edytować istniejącą stronę</h3>
+        <ol class="steps">
+          <li>Wejdź w <strong>Strony → Wszystkie strony</strong>.</li>
+          <li>Znajdź właściwą podstronę i kliknij jej tytuł lub <strong>Edytuj</strong>.</li>
+          <li>Kliknij blok, który chcesz zmienić. Jego pola pojawią się w edytorze albo w prawym panelu.</li>
+          <li>Zmień tekst, zdjęcie, link lub kolejność elementów.</li>
+          <li>Kliknij <strong>Zaktualizuj</strong>.</li>
+          <li>Kliknij <strong>Zobacz stronę</strong> i sprawdź rezultat.</li>
+        </ol>
+
+        <h3>Jak dodać nowy blok</h3>
+        <ol>
+          <li>W edytorze kliknij niebieski lub czarny przycisk <strong>+</strong>.</li>
+          <li>Wyszukaj blok po nazwie, np. <strong>Photo Gallery</strong>.</li>
+          <li>Wybierz blok z kategorii bloków SpeedShot/WCO.</li>
+          <li>Uzupełnij pola.</li>
+          <li>Przeciągnij blok w odpowiednie miejsce, korzystając z widoku listy.</li>
+          <li>Zapisz stronę.</li>
+        </ol>
+
+        <h3>Najważniejsze ustawienia wspólne</h3>
+        <table>
+          <thead><tr><th>Pole</th><th>Znaczenie</th><th>Zalecenie</th></tr></thead>
+          <tbody>
+            <tr><td>Eyebrow / Nadtytuł</td><td>Krótki tekst nad głównym tytułem sekcji.</td><td>Najlepiej 1–4 słowa.</td></tr>
+            <tr><td>Title / Tytuł</td><td>Główny nagłówek sekcji.</td><td>Krótki i konkretny.</td></tr>
+            <tr><td>Content / Intro / Treść</td><td>Opis pod nagłówkiem.</td><td>Unikaj bardzo długich bloków tekstu.</td></tr>
+            <tr><td>Link / Button</td><td>Tekst przycisku, adres oraz sposób otwarcia.</td><td>Sprawdź, czy adres zaczyna się od <code>https://</code> albo prowadzi do istniejącej strony.</td></tr>
+            <tr><td>Background color</td><td>Kolor tła całej sekcji.</td><td>Nie zmieniaj bez potrzeby, aby zachować spójność projektu.</td></tr>
+            <tr><td>Block ID</td><td>Kotwica do linku, np. <code>kontakt</code>.</td><td>Bez spacji i polskich znaków.</td></tr>
+            <tr><td>Gap top / bottom</td><td>Margines nad i pod sekcją.</td><td>Zwykle pozostaw wartość domyślną.</td></tr>
+            <tr><td>Space top / bottom</td><td>Wewnętrzny odstęp sekcji.</td><td>Zwykle <code>md</code>; zmieniaj tylko po sprawdzeniu wyglądu.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="success">
+          Do zmiany kolejności sekcji najlepiej używać ikony <strong>Widok listy</strong> w górnej części edytora. Pokazuje ona wszystkie bloki w prostym drzewie i ogranicza ryzyko przeniesienia nieprawidłowego elementu.
+        </div>
+      </section>
+
+      <section id="bloki">
+        <h2>Bloki dostępne na stronie</h2>
+        <p class="lead">Poniżej opisano, do czego służy każdy blok i co można w nim edytować.</p>
+
+        <table>
+          <thead><tr><th>Blok</th><th>Zastosowanie i pola</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Hero Banner</strong></td><td>Duży baner otwierający stronę. Edytujesz zdjęcia tła, nadtytuł, tytuł, treść, główny i dodatkowy przycisk oraz czas zmiany slajdów. Czas podawany jest w milisekundach, np. <code>5000</code> = 5 sekund.</td></tr>
+            <tr><td><strong>About Section</strong></td><td>Sekcja tekst + zdjęcie. Pola: nadtytuł, tytuł, treść, przycisk i obraz.</td></tr>
+            <tr><td><strong>Text image</strong></td><td>Tekst obok zdjęcia. Można ustawić nadtytuł, tytuł, treść, obraz, pozycję obrazu i link.</td></tr>
+            <tr><td><strong>Attractions Section</strong></td><td>Automatyczna siatka atrakcji pobierana z podmenu „Atrakcje” w menu o nazwie <strong>Main</strong>. W bloku edytuje się nagłówek, opis i przycisk, ale same atrakcje zmienia się w menu.</td></tr>
+            <tr><td><strong>Featured Attractions</strong></td><td>Trzy lub więcej wyróżnionych atrakcji. Każdy element może mieć nazwę, badge, opis, zdjęcie, kadrowanie, adres URL i tagi.</td></tr>
+            <tr><td><strong>Atrakcja — lokalizacje</strong></td><td>Lista miejsc odpowiednich dla atrakcji. Zaznaczasz gotowe opcje, np. park, boisko, sala, plaża lub plener.</td></tr>
+            <tr><td><strong>Katalog atrakcji</strong></td><td>Pliki PDF do pobrania. Dla każdego pliku ustawiasz PDF, etykietę przycisku i opcjonalny opis.</td></tr>
+            <tr><td><strong>Services</strong></td><td>Karty usług. Każda karta ma ikonę, tytuł, link i opis.</td></tr>
+            <tr><td><strong>For Whom</strong></td><td>Sekcja prezentująca grupy odbiorców: dorosłych i dzieci. Część treści może pochodzić z domyślnych ustawień bloku.</td></tr>
+            <tr><td><strong>How We Work</strong></td><td>Etapy współpracy. Edytujesz nadtytuł, tytuł, opis i listę kroków. Pusta lista powoduje użycie treści domyślnej.</td></tr>
+            <tr><td><strong>FAQ Accordion</strong></td><td>Lista pytań i rozwijanych odpowiedzi. Elementy można dodawać, usuwać i przeciągać.</td></tr>
+            <tr><td><strong>Testimonials Slider</strong></td><td>Slider opinii. Każda opinia ma treść, imię autora i opcjonalną rolę/podpis.</td></tr>
+            <tr><td><strong>Clients Logos</strong></td><td>Przewijany pasek logotypów klientów. Można wybrać galerię logo; jeżeli pole jest puste, blok może użyć galerii ze strony „O nas”.</td></tr>
+            <tr><td><strong>Photo Gallery</strong></td><td>Galeria zdjęć z powiększeniem. Ustawiasz zdjęcia, liczbę kolumn oraz sposób dopasowania: przycięcie <em>cover</em> lub całe zdjęcie <em>contain</em>.</td></tr>
+            <tr><td><strong>Latest Posts</strong></td><td>Automatyczna lista najnowszych wpisów. Ustawiasz nagłówek, liczbę wpisów i etykiety przycisków. Same artykuły dodaje się w sekcji <strong>Wpisy</strong>.</td></tr>
+            <tr><td><strong>Upcoming Events</strong></td><td>Slider najbliższych wydarzeń. Ustawiasz nagłówek, opis, liczbę wydarzeń i przycisk do archiwum. Dane wydarzeń pochodzą z sekcji <strong>Wydarzenia</strong>.</td></tr>
+            <tr><td><strong>Available Cities</strong></td><td>Siatka dostępnych miast. W panelu można zmienić jedynie nagłówek i opis; lista miast i adresów jest obecnie wpisana w kodzie.</td></tr>
+            <tr><td><strong>Contact Info</strong></td><td>Karty z telefonem, e-mailem i krótkimi podpowiedziami, np. czasem odpowiedzi i obszarem działania.</td></tr>
+            <tr><td><strong>Contact Section</strong></td><td>Pełny formularz zapytania. Edytujesz nadtytuł, tytuł, opis i adres e-mail odbiorcy.</td></tr>
+            <tr><td><strong>Container Group</strong></td><td>Kontener grupujący inne bloki. Służy głównie do ustawienia szerokości i wspólnego tła.</td></tr>
+            <tr><td><strong>Two Columns</strong></td><td>Układ dwóch kolumn. Do środka dodaje się bloki <strong>Two Columns Column</strong>, a następnie zwykłą treść.</td></tr>
+            <tr><td><strong>Spacer</strong></td><td>Pusty odstęp. Ma osobną wysokość dla komputera i telefonu. Używaj oszczędnie.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="warning">
+          Blok <strong>Testowy</strong> jest blokiem technicznym. Nie należy używać go na stronach produkcyjnych bez konsultacji z opiekunem technicznym.
+        </div>
+      </section>
+
+      <section id="menu">
+        <h2>Menu oraz lista atrakcji</h2>
+        <p>Motyw obsługuje dwie lokalizacje: <strong>Main Menu</strong> w nagłówku oraz <strong>Footer Menu</strong> w stopce.</p>
+
+        <h3>Jak zmienić menu</h3>
+        <ol class="steps">
+          <li>Wejdź w <strong>Wygląd → Menu</strong>.</li>
+          <li>Wybierz właściwe menu z listy u góry.</li>
+          <li>Dodaj stronę lub własny odnośnik z lewej kolumny.</li>
+          <li>Przeciągnij element, aby zmienić kolejność.</li>
+          <li>Przesuń element lekko w prawo, aby utworzyć podmenu.</li>
+          <li>Zaznacz lokalizację <strong>Main Menu</strong> albo <strong>Footer Menu</strong>.</li>
+          <li>Kliknij <strong>Zapisz menu</strong>.</li>
+        </ol>
+
+        <h3>Jak edytować atrakcje pokazywane w siatce</h3>
+        <p>Blok <strong>Attractions Section</strong> szuka menu o nazwie <strong>Main</strong>, a następnie pozycji najwyższego poziomu o nazwie <strong>Atrakcje</strong>.</p>
+        <ol>
+          <li>Otwórz menu <strong>Main</strong>.</li>
+          <li>Znajdź pozycję <strong>Atrakcje</strong>.</li>
+          <li>Dodaj pod nią link do nowej atrakcji lub edytuj istniejący.</li>
+          <li>Ustaw poprawną nazwę i adres URL.</li>
+          <li>Zapisz menu i sprawdź sekcję atrakcji na stronie.</li>
+        </ol>
+        <p>Obsługiwana jest struktura płaska oraz grupowana. Przy strukturze grupowanej pod „Atrakcje” mogą znaleźć się grupy, a właściwe atrakcje poziom niżej.</p>
+
+        <div class="note">
+          Ikona i krótki opis karty są automatycznie dopasowywane do rozpoznanych nazw atrakcji. Dla nowej, nietypowej nazwy zostanie użyta ikona i opis domyślny. Zmiana automatycznego opisu wymaga edycji motywu.
+        </div>
+      </section>
+
+      <section id="wydarzenia">
+        <h2>Wydarzenia</h2>
+        <p>Wydarzenia mają własne podstrony, archiwum pod adresem <code>/wydarzenia/</code> oraz formularz zapisu.</p>
+
+        <h3>Jak dodać wydarzenie</h3>
+        <ol class="steps">
+          <li>Wejdź w <strong>Wydarzenia → Dodaj wydarzenie</strong>.</li>
+          <li>Wpisz tytuł wydarzenia.</li>
+          <li>Dodaj treść: program, warunki udziału, opis atrakcji i pozostałe informacje.</li>
+          <li>Uzupełnij <strong>Zajawkę</strong>. Jest używana jako krótki opis w górnej części strony.</li>
+          <li>Ustaw <strong>Obrazek wyróżniający</strong>. Będzie głównym zdjęciem wydarzenia.</li>
+          <li>Uzupełnij pola szczegółów wydarzenia.</li>
+          <li>Kliknij <strong>Opublikuj</strong>.</li>
+        </ol>
+
+        <table>
+          <thead><tr><th>Pole wydarzenia</th><th>Znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>Start date</td><td>Data i godzina rozpoczęcia. Pole wymagane.</td></tr>
+            <tr><td>End date</td><td>Opcjonalna data i godzina zakończenia.</td></tr>
+            <tr><td>Location</td><td>Miejsce wydarzenia, widoczne przy dacie.</td></tr>
+            <tr><td>Badge</td><td>Krótka etykieta, np. „Bezpłatne”, „Nowość” albo „Zapisy otwarte”.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Co dzieje się po terminie</h3>
+        <p>Po upływie daty wydarzenia formularz zapisu zostaje zastąpiony komunikatem, że wydarzenie już się odbyło. Nie trzeba usuwać wydarzenia — może pozostać jako relacja lub archiwum.</p>
+
+        <div class="success">
+          Po publikacji wykonaj próbny zapis na wydarzenie. Sprawdź komunikat na stronie, obecność zapisu w panelu oraz wiadomość wysłaną na adres administratora WordPressa.
+        </div>
+      </section>
+
+      <section id="zapisy">
+        <h2>Zapisy na wydarzenia</h2>
+        <p>Każde zgłoszenie z formularza wydarzenia zapisuje się w panelu w sekcji <strong>Zapisy</strong>. System wysyła również powiadomienie na adres ustawiony w <strong>Ustawienia → Ogólne → Adres e-mail administratora</strong>.</p>
+
+        <h3>Dane zapisywane przy zgłoszeniu</h3>
+        <ul>
+          <li>imię i nazwisko,</li>
+          <li>adres e-mail,</li>
+          <li>telefon,</li>
+          <li>liczba osób,</li>
+          <li>wybrane wydarzenie,</li>
+          <li>data zapisu,</li>
+          <li>opcjonalna wiadomość.</li>
+        </ul>
+
+        <h3>Jak sprawdzić lub wyeksportować zapisy</h3>
+        <ol>
+          <li>Wejdź w <strong>Zapisy</strong>.</li>
+          <li>Wybierz wydarzenie w filtrze, aby ograniczyć listę.</li>
+          <li>Sprawdź dane uczestników.</li>
+          <li>Użyj przycisku eksportu CSV, aby pobrać listę możliwą do otwarcia w Excelu.</li>
+        </ol>
+
+        <div class="warning">
+          Lista zawiera dane osobowe. Nie wysyłaj jej osobom nieupoważnionym, nie publikuj i przechowuj tylko tak długo, jak jest to potrzebne do obsługi wydarzenia oraz obowiązków prawnych.
+        </div>
+      </section>
+
+      <section id="inwestycje">
+        <h2>Inwestycje</h2>
+        <p>Typ treści <strong>Inwestycje</strong> obsługuje tytuł, główną treść i obrazek wyróżniający.</p>
+        <ol>
+          <li>Wejdź w <strong>Inwestycje → Dodaj nową</strong>.</li>
+          <li>Wpisz nazwę inwestycji.</li>
+          <li>Dodaj opis w edytorze blokowym.</li>
+          <li>Ustaw obrazek wyróżniający.</li>
+          <li>Uzupełnij Yoast SEO, jeśli inwestycja ma być widoczna w Google.</li>
+          <li>Opublikuj i sprawdź podstronę.</li>
+        </ol>
+      </section>
+
+      <section id="wpisy">
+        <h2>Aktualności i wpisy</h2>
+        <p>Standardowe wpisy mogą być automatycznie wyświetlane przez blok <strong>Latest Posts</strong>.</p>
+        <ol class="steps">
+          <li>Wejdź w <strong>Wpisy → Dodaj nowy</strong>.</li>
+          <li>Dodaj tytuł i treść artykułu.</li>
+          <li>Wybierz kategorię.</li>
+          <li>Ustaw obrazek wyróżniający.</li>
+          <li>Uzupełnij zajawkę, aby kontrolować krótki opis na liście.</li>
+          <li>Ustaw tytuł i opis SEO.</li>
+          <li>Opublikuj wpis.</li>
+        </ol>
+        <p>Aby wpis zniknął ze strony bez usuwania, zmień jego status na <strong>Szkic</strong>. Kosza używaj tylko wtedy, gdy treść rzeczywiście nie będzie już potrzebna.</p>
+      </section>
+
+      <section id="formularz">
+        <h2>Formularz kontaktowy</h2>
+        <p>Formularz jest częścią bloku <strong>Contact Section</strong> i nie korzysta z zewnętrznej wtyczki formularzowej. Zgłoszenia są wysyłane e-mailem, ale nie są zapisywane w panelu.</p>
+
+        <h3>Jak zmienić odbiorcę formularza</h3>
+        <ol>
+          <li>Otwórz stronę zawierającą blok <strong>Contact Section</strong>.</li>
+          <li>Kliknij blok.</li>
+          <li>W polu <strong>Recipient email</strong> wpisz adres odbiorcy.</li>
+          <li>Zaktualizuj stronę.</li>
+          <li>Wyślij testową wiadomość.</li>
+        </ol>
+        <p>Jeżeli pole odbiorcy jest puste, formularz wysyła wiadomości na <code>info@centrumrozrywki-speedshot.pl</code>.</p>
+
+        <h3>Pola wymagane od klienta</h3>
+        <p>Imię i nazwisko, telefon, e-mail, miejsce, liczba osób, data oraz przynajmniej jedna atrakcja. Dodatkowa wiadomość jest opcjonalna.</p>
+
+        <div class="warning">
+          Po zmianie domeny, hostingu lub ustawień poczty wykonaj test przez <strong>WP Mail SMTP</strong> i test formularza na stronie. Sam komunikat „wysłano” nie zastępuje sprawdzenia, czy wiadomość faktycznie dotarła.
+        </div>
+      </section>
+
+      <section id="ustawienia">
+        <h2>Ustawienia motywu</h2>
+        <p>Pozycja <strong>Ustawienia motywu</strong> zawiera dane używane globalnie w całym serwisie.</p>
+        <table>
+          <thead><tr><th>Zakładka</th><th>Co można zmienić</th></tr></thead>
+          <tbody>
+            <tr><td>Branding</td><td>Logo wyświetlane w nagłówku i stopce.</td></tr>
+            <tr><td>Custom code</td><td>Dodatkowy kod w sekcji <code>&lt;head&gt;</code> lub przed <code>&lt;/body&gt;</code>.</td></tr>
+            <tr><td>Tracking</td><td>Identyfikator Google Tag Manager, Google Analytics 4 oraz dodatkowe skrypty śledzące.</td></tr>
+            <tr><td>Social &amp; Meta</td><td>Adresy Facebooka, Instagrama, LinkedIna i X/Twittera oraz domyślny tytuł i opis SEO.</td></tr>
+            <tr><td>Banners and CTA</td><td>Globalny banner i globalna sekcja CTA: włączenie, tekst, kod i link.</td></tr>
+            <tr><td>Fallbacks</td><td>Treści awaryjne strony głównej i błędu 404, używane, gdy właściwa treść jest pusta.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Zmiana logo</h3>
+        <ol>
+          <li>Wejdź w <strong>Ustawienia motywu → Branding</strong>.</li>
+          <li>Kliknij pole <strong>Logo</strong>.</li>
+          <li>Wybierz plik z biblioteki lub wgraj nowy.</li>
+          <li>Zapisz ustawienia.</li>
+          <li>Sprawdź nagłówek i stopkę na telefonie oraz komputerze.</li>
+        </ol>
+
+        <div class="warning">
+          Zakładki <strong>Custom code</strong> i <strong>Tracking</strong> są techniczne. Błędny skrypt może spowolnić stronę, wyświetlić błędy albo naruszyć ustawienia zgód cookies. Nie wklejaj tam kodu z nieznanego źródła.
+        </div>
+      </section>
+
+      <section id="seo">
+        <h2>SEO i Yoast</h2>
+        <p>Wtyczka Yoast SEO pozwala ustawić sposób prezentacji strony w Google i mediach społecznościowych.</p>
+
+        <h3>Edycja SEO pojedynczej strony</h3>
+        <ol class="steps">
+          <li>Otwórz stronę, wpis, wydarzenie lub inwestycję.</li>
+          <li>Otwórz panel <strong>Yoast SEO</strong>.</li>
+          <li>Ustaw <strong>Tytuł SEO</strong>. Zwykle powinien mieć około 50–60 znaków.</li>
+          <li>Ustaw <strong>Opis meta</strong>. Zwykle powinien mieć około 140–160 znaków.</li>
+          <li>Sprawdź podgląd wyniku wyszukiwania.</li>
+          <li>Zapisz treść.</li>
+        </ol>
+
+        <h3>Dobre praktyki</h3>
+        <ul>
+          <li>Każda ważna podstrona powinna mieć własny, niepowtarzalny tytuł i opis.</li>
+          <li>Nie upychaj wielu słów kluczowych w jednym nagłówku.</li>
+          <li>Nie zmieniaj adresu URL opublikowanej strony bez przygotowania przekierowania 301.</li>
+          <li>Po usunięciu strony sprawdź, czy nie prowadzą do niej menu i linki.</li>
+          <li>Uzupełniaj tekst alternatywny zdjęć opisem tego, co faktycznie przedstawiają.</li>
+        </ul>
+      </section>
+
+      <section id="media">
+        <h2>Zdjęcia, logo i pliki PDF</h2>
+        <p>Pliki dodaje się przez <strong>Media → Dodaj plik multimedialny</strong> albo bezpośrednio podczas edycji pola obrazu lub galerii.</p>
+
+        <h3>Zalecenia</h3>
+        <table>
+          <thead><tr><th>Rodzaj</th><th>Zalecenie</th></tr></thead>
+          <tbody>
+            <tr><td>Zdjęcia hero</td><td>Poziome, dobrej jakości, najlepiej WebP lub JPG po kompresji. Nie wgrywaj plików prosto z aparatu o wadze kilkunastu MB.</td></tr>
+            <tr><td>Zdjęcia kart</td><td>Zachowuj podobne proporcje, aby siatka wyglądała równo.</td></tr>
+            <tr><td>Logo klientów</td><td>Najlepiej PNG/WebP z przezroczystym tłem albo bezpieczny SVG.</td></tr>
+            <tr><td>PDF</td><td>Nazwa pliku powinna być czytelna, bez przypadkowych numerów i znaków specjalnych.</td></tr>
+            <tr><td>Tekst alternatywny</td><td>Opisuje zdjęcie osobom korzystającym z czytników ekranu i wspiera SEO.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Wymiana zdjęcia bez usuwania starego</h3>
+        <ol>
+          <li>Kliknij pole obrazu w edytowanym bloku.</li>
+          <li>Wybierz <strong>Usuń</strong> lub ikonę edycji przy polu — nie usuwaj pliku z całej biblioteki.</li>
+          <li>Wybierz nowe zdjęcie.</li>
+          <li>Uzupełnij tekst alternatywny.</li>
+          <li>Zapisz stronę.</li>
+        </ol>
+      </section>
+
+      <section id="stale">
+        <h2>Treści, których obecnie nie zmienisz w panelu</h2>
+        <p>Poniższe dane są wpisane bezpośrednio w motywie. Ich zmiana wymaga pomocy technicznej albo rozbudowy ustawień panelu.</p>
+        <table>
+          <thead><tr><th>Element</th><th>Obecna zawartość / uwaga</th></tr></thead>
+          <tbody>
+            <tr><td>Górny pasek kontaktowy</td><td>Telefon <code>+48 536 304 931</code>, e-mail <code>info@centrumrozrywki-speedshot.pl</code> i domyślne linki social media.</td></tr>
+            <tr><td>Opis firmy w stopce</td><td>Tekst o mobilnych atrakcjach dla dzieci, szkół, rodzin i firm.</td></tr>
+            <tr><td>Szybkie linki w stopce</td><td>Atrakcje, O nas, Kontakt i Oferta 2025.</td></tr>
+            <tr><td>Linki „Informacje” w stopce</td><td>Imprezy integracyjne, pikniki, wycieczki szkolne i urodziny.</td></tr>
+            <tr><td>Kontakt w stopce</td><td>Adres w Oławie, e-mail i telefon.</td></tr>
+            <tr><td>Available Cities</td><td>Lista miast, placówek, adresów i linków do szczegółów.</td></tr>
+            <tr><td>Domyślne opisy atrakcji</td><td>Ikony i krótkie opisy rozpoznawanych nazw w siatce atrakcji.</td></tr>
+            <tr><td>Lista checkboxów formularza</td><td>Nazwy atrakcji są przygotowywane przez kod bloku formularza.</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          Linki social media w stopce są pobierane z <strong>Ustawień motywu</strong>, ale ikony w górnym pasku mają obecnie adresy domyślne wpisane w szablonie. To dwa osobne miejsca.
+        </div>
+      </section>
+
+      <section id="bezpieczenstwo">
+        <h2>Bezpieczeństwo i codzienna obsługa</h2>
+        <ul>
+          <li>Każdy użytkownik powinien mieć własne konto. Nie udostępniaj jednego hasła wielu osobom.</li>
+          <li>Używaj długiego, unikalnego hasła i uwierzytelniania dwuskładnikowego, jeżeli jest dostępne.</li>
+          <li>Nie instaluj przypadkowych wtyczek i motywów.</li>
+          <li>Przed aktualizacjami wykonaj kopię plików i bazy danych.</li>
+          <li>Po większych zmianach wyczyść cache, jeżeli strona nadal pokazuje starą wersję.</li>
+          <li>Regularnie testuj oba formularze: kontaktowy oraz zapis na wydarzenie.</li>
+          <li>Usuwaj niepotrzebne konta administratorów.</li>
+          <li>Nie publikuj danych uczestników wydarzeń ani zgłoszeń kontaktowych.</li>
+        </ul>
+
+        <h3>Gdy coś przestanie działać</h3>
+        <ol>
+          <li>Nie wykonuj kolejnych przypadkowych zmian.</li>
+          <li>Zapisz adres strony i zrób zrzut ekranu błędu.</li>
+          <li>Sprawdź, jaka była ostatnia wykonana zmiana.</li>
+          <li>Jeżeli problem dotyczy maili, wykonaj test WP Mail SMTP.</li>
+          <li>Skontaktuj się z opiekunem technicznym i przekaż powyższe informacje.</li>
+        </ol>
+      </section>
+
+      <section id="techniczne">
+        <h2>Informacje techniczne dla opiekuna strony</h2>
+        <p>Motyw SpeedShot korzysta z Timber 2, Twig, ACF Pro, bloków Gutenberga, SCSS i Webpacka. WooCommerce jest wspierany opcjonalnie.</p>
+        <table>
+          <thead><tr><th>Element</th><th>Ścieżka</th></tr></thead>
+          <tbody>
+            <tr><td>Motyw</td><td><span class="path">wordpress/wp-content/themes/speedshot</span></td></tr>
+            <tr><td>Bloki ACF</td><td><span class="path">views/blocks/</span></td></tr>
+            <tr><td>Szablony</td><td><span class="path">views/</span></td></tr>
+            <tr><td>Logika PHP</td><td><span class="path">app/</span></td></tr>
+            <tr><td>Pola ACF JSON</td><td><span class="path">acf-json/</span> oraz pliki <span class="path">group_*.json</span> przy blokach</td></tr>
+            <tr><td>Źródła stylów i JS</td><td><span class="path">assets/</span></td></tr>
+            <tr><td>Gotowy build</td><td><span class="path">public/</span></td></tr>
+          </tbody>
+        </table>
+
+        <h3>Build motywu</h3>
+        <pre><code>cd wordpress/wp-content/themes/speedshot
+composer install
+npm install
+npm run build</code></pre>
+
+        <h3>Środowisko lokalne</h3>
+        <pre><code>docker compose up -d
+
+# strona
+https://speedshot.localhost
+
+# phpMyAdmin
+https://pma.speedshot.localhost</code></pre>
+
+        <p>Wymagane są WordPress 6+, PHP 8+, Timber i ACF Pro. Bez Timber motyw się nie uruchomi, a bez ACF Pro niestandardowe bloki i ustawienia nie będą dostępne.</p>
+      </section>
+
+      <section id="checklista">
+        <h2>Checklista po zmianach</h2>
+        <ul>
+          <li>Sprawdź stronę główną na komputerze i telefonie.</li>
+          <li>Sprawdź menu, rozwijane podmenu i wszystkie zmieniane linki.</li>
+          <li>Sprawdź zdjęcia: czy nie są rozciągnięte, rozmazane lub źle wykadrowane.</li>
+          <li>Sprawdź jedną podstronę atrakcji.</li>
+          <li>Jeżeli zmieniano wydarzenie, sprawdź datę, miejsce i próbny zapis.</li>
+          <li>Jeżeli zmieniano formularz, wyślij próbne zapytanie i sprawdź skrzynkę.</li>
+          <li>Sprawdź tytuł SEO i opis meta.</li>
+          <li>Sprawdź, czy PDF-y otwierają się poprawnie.</li>
+          <li>Sprawdź, czy nie ma niedziałających linków i błędów 404.</li>
+          <li>W razie używania cache wyczyść go po zakończeniu zmian.</li>
+        </ul>
+        <p class="muted">Dokumentacja przygotowana na podstawie projektu SpeedShot, stan na 19 czerwca 2026 r.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const links = Array.from(document.querySelectorAll('.nav a'));
+    const sections = links
+      .map(link => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      links.forEach(link => {
+        link.classList.toggle('is-active', link.getAttribute('href') === '#' + visible.target.id);
+      });
+    }, {
+      rootMargin: '-20% 0px -65% 0px',
+      threshold: [0.1, 0.3, 0.6]
+    });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>

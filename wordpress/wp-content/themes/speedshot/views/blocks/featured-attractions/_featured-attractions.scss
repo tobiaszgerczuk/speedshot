@@ -95,7 +95,18 @@
     background-position: center;
     overflow: hidden;
 
-   
+    // Kadrowanie zdjęcia w pionie (poziomo zawsze wyśrodkowane)
+    &--pos-top {
+      background-position: center top;
+    }
+
+    &--pos-center {
+      background-position: center center;
+    }
+
+    &--pos-bottom {
+      background-position: center bottom;
+    }
   }
 
   &__image-icon {

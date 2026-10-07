@@ -65,6 +65,7 @@ $context['attractions'] = [
     'Dmuchańce na wynajem',
     'Zamki Dmuchane 5 szt.',
     'Tor Małych Mistrzów',
+    'Robo Pies',
 ];
 
 Timber::render('blocks/contact-section/contact-section.twig', $context);

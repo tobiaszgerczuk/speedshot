@@ -33,9 +33,19 @@ a {
   }
 }
 
+.section-header__subtitle,
+.heading__subtitle {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-muted);
+}
+
 @include mix.mobile {
   [class*="__title"],
-  [class*="__eyebrow"] {
+  [class*="__eyebrow"],
+  [class*="__subtitle"] {
     max-width: 100% !important;
   }
 }

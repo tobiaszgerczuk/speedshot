@@ -131,6 +131,9 @@ if (!empty($acf_items)) {
             'url'         => $row['url']          ?? $defaults[$i]['url']         ?? '#',
             'icon'        => $defaults[$i]['icon'] ?? 'sparkles',
             'image'       => $row['image']        ?? '',
+            'image_position' => in_array($row['image_position'] ?? '', ['top', 'center', 'bottom'], true)
+                ? $row['image_position']
+                : 'center',
             'tags'        => $tags,
         ];
     }
@@ -142,39 +145,47 @@ if (!empty($acf_items)) {
 /**
  * Zdjęcie karty: jeśli pole 'image' jest puste, pobierz zdjęcie ze strony danej
  * atrakcji (miniatura -> pierwsze zdjęcie z galerii). Gdy brak — zostaje ikona.
+ * Zwraca ['image' => url, 'position' => top|center|bottom] — pozycja kadrowania
+ * pochodzi z pola ACF strony atrakcji ('featured_thumb_position').
  */
-$resolve_attraction_image = static function (string $url): string {
+$resolve_attraction_image = static function (string $url): array {
     $path = (string) wp_parse_url($url, PHP_URL_PATH);
     $slug = trim($path, '/');
     if ($slug === '') {
-        return '';
+        return ['image' => '', 'position' => 'center'];
     }
     $page = get_page_by_path($slug);
     if (!$page) {
-        return '';
+        return ['image' => '', 'position' => 'center'];
     }
+
+    $position = get_field('featured_thumb_position', $page->ID);
+    $position = in_array($position, ['top', 'center', 'bottom'], true) ? $position : 'center';
 
     $thumb_id = get_post_thumbnail_id($page->ID);
     if ($thumb_id) {
         $src = wp_get_attachment_image_url($thumb_id, 'large');
         if ($src) {
-            return $src;
+            return ['image' => $src, 'position' => $position];
         }
     }
 
     if (preg_match('/"photo_gallery_images":\[\s*"?(\d+)"?/', $page->post_content, $m)) {
         $src = wp_get_attachment_image_url((int) $m[1], 'large');
         if ($src) {
-            return $src;
+            return ['image' => $src, 'position' => $position];
         }
     }
 
-    return '';
+    return ['image' => '', 'position' => $position];
 };
 
 foreach ($context['attractions'] as &$attraction) {
     if (empty($attraction['image']) && !empty($attraction['url'])) {
-        $attraction['image'] = $resolve_attraction_image((string) $attraction['url']);
+        $resolved = $resolve_attraction_image((string) $attraction['url']);
+        $attraction['image'] = $resolved['image'];
+        // Kadrowanie ustawione na stronie atrakcji ma pierwszeństwo dla zdjęć z automatu.
+        $attraction['image_position'] = $resolved['position'];
     }
 }
 unset($attraction);

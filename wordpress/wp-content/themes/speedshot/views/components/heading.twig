@@ -8,6 +8,10 @@
     <{{ heading_tag }} class="heading__title">{{ title }}</{{ heading_tag }}>
   {% endif %}
 
+  {% if subtitle %}
+    <h3 class="heading__subtitle">{{ subtitle }}</h3>
+  {% endif %}
+
   {% if intro %}
     <div class="heading__intro">
       {{ intro }}

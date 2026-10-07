@@ -1,0 +1,147 @@
+{
+    "key": "group_block_attractions-catalog",
+    "title": "Attractions Catalog Block",
+    "fields": [
+        {
+            "key": "field_attractions_catalog_eyebrow",
+            "label": "Eyebrow",
+            "name": "attractions_catalog_eyebrow",
+            "type": "text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "default_value": "Do pobrania",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_attractions_catalog_title",
+            "label": "Tytuł",
+            "name": "attractions_catalog_title",
+            "type": "text",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "50", "class": "", "id": "" },
+            "default_value": "Katalog atrakcji",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_attractions_catalog_subtitle",
+            "label": "Podtytuł (h3)",
+            "name": "attractions_catalog_subtitle",
+            "type": "text",
+            "instructions": "Opcjonalny nagłówek h3 wyświetlany pod tytułem sekcji.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_attractions_catalog_intro",
+            "label": "Wprowadzenie",
+            "name": "attractions_catalog_intro",
+            "type": "wysiwyg",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_attractions_catalog_files",
+            "label": "Pliki PDF",
+            "name": "attractions_catalog_files",
+            "type": "repeater",
+            "instructions": "Dodaj pliki do pobrania (np. dwa katalogi/oferty PDF).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "layout": "block",
+            "min": 0,
+            "max": 0,
+            "button_label": "Dodaj plik PDF",
+            "sub_fields": [
+                {
+                    "key": "field_attractions_catalog_files_file",
+                    "label": "Plik PDF",
+                    "name": "file",
+                    "type": "file",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": "pdf"
+                },
+                {
+                    "key": "field_attractions_catalog_files_label",
+                    "label": "Etykieta",
+                    "name": "label",
+                    "type": "text",
+                    "instructions": "Nazwa wyświetlana na przycisku. Gdy pusta — użyta zostanie nazwa pliku.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "50", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_attractions_catalog_files_note",
+                    "label": "Opis (opcjonalnie)",
+                    "name": "note",
+                    "type": "text",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": { "width": "", "class": "", "id": "" },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/attractions-catalog"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Generated for the Attractions Catalog block.",
+    "show_in_rest": 0,
+    "modified": 1781913600,
+    "wco_metadata": {
+        "block_name": "attractions-catalog",
+        "icon": "media-document",
+        "category": "wco-blocks",
+        "text_domain": "speedshot"
+    }
+}

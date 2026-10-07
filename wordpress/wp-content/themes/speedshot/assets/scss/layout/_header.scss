@@ -86,17 +86,63 @@
   z-index: 1000;
   color: $color-black;
   padding-top: 0;
-  background: $color-white;
-  box-shadow: 0 2px 12px rgba($color-black, 0.07);
+  padding-bottom: 56px;
+  // Gradient bieli przechodzącej w przezroczystość od góry. Stopy ułożone wg
+  // krzywej ease-in-out (tzw. easing gradient) — liniowy alpha-fade tworzy
+  // widoczne pasmo, te wartości dają perceptualnie idealnie gładkie przejście.
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.987) 8.1%,
+    rgba(255, 255, 255, 0.951) 15.5%,
+    rgba(255, 255, 255, 0.896) 22.5%,
+    rgba(255, 255, 255, 0.825) 29%,
+    rgba(255, 255, 255, 0.741) 35.3%,
+    rgba(255, 255, 255, 0.648) 41.2%,
+    rgba(255, 255, 255, 0.55) 47.1%,
+    rgba(255, 255, 255, 0.45) 52.9%,
+    rgba(255, 255, 255, 0.352) 58.8%,
+    rgba(255, 255, 255, 0.259) 64.7%,
+    rgba(255, 255, 255, 0.175) 70.1%,
+    rgba(255, 255, 255, 0.104) 77.5%,
+    rgba(255, 255, 255, 0.049) 84.5%,
+    rgba(255, 255, 255, 0.013) 91.9%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: none;
+  // Przezroczysta, wyższa część headera nie może przechwytywać klików w hero.
+  pointer-events: none;
   transition: all 0.3s ease;
+
+  > * {
+    pointer-events: auto;
+  }
 
   &.is-scrolled {
     padding-top: 0;
     color: $color-black;
-    box-shadow: 0 12px 34px rgba($color-black, 0.08);
+    box-shadow: none;
     border-bottom-color: transparent;
-    background-color: rgba($color-white, 0.96);
-    backdrop-filter: blur(14px);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.957) 8.1%,
+      rgba(255, 255, 255, 0.922) 15.5%,
+      rgba(255, 255, 255, 0.869) 22.5%,
+      rgba(255, 255, 255, 0.8) 29%,
+      rgba(255, 255, 255, 0.719) 35.3%,
+      rgba(255, 255, 255, 0.629) 41.2%,
+      rgba(255, 255, 255, 0.534) 47.1%,
+      rgba(255, 255, 255, 0.437) 52.9%,
+      rgba(255, 255, 255, 0.341) 58.8%,
+      rgba(255, 255, 255, 0.251) 64.7%,
+      rgba(255, 255, 255, 0.17) 70.1%,
+      rgba(255, 255, 255, 0.101) 77.5%,
+      rgba(255, 255, 255, 0.048) 84.5%,
+      rgba(255, 255, 255, 0.013) 91.9%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    backdrop-filter: none;
   }
 
   .header-inner {
@@ -232,6 +278,22 @@
       transform: translateY(8px);
       transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 
+      // Dropdown bez zagnieżdżonych pod-menu (np. Atrakcje): nigdy nie wychodź
+      // poza ekran — przewijaj długą listę zamiast ją ucinać. Wykluczamy menu
+      // z pod-menu 3. poziomu (np. Oferta), bo overflow ucinałby boczne wysuwki.
+      &:not(:has(.sub-menu)) {
+        max-height: min(72vh, calc(100vh - 150px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      // Długie listy (np. Atrakcje) — dwie kolumny, żeby ograniczyć przewijanie.
+      &:has(> .menu-item:nth-child(11)) {
+        grid-template-columns: 1fr 1fr;
+        min-width: 480px;
+        max-width: min(560px, calc(100vw - 32px));
+      }
+
       &::before {
         content: "";
         position: absolute;
@@ -322,6 +384,12 @@
   }
 
   @include mobile {
+    // Gdy menu jest otwarte, primary-nav i tak zakrywa ekran pełną bielą —
+    // przywracamy solidne tło, żeby logo nie prześwitywało.
+    &.is-menu-open {
+      background: $color-white;
+    }
+
     .hamburger {
       display: block;
     }

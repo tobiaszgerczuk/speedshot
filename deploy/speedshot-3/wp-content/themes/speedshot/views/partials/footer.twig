@@ -1,0 +1,121 @@
+<footer class="site-footer">
+	<span class="site-footer__decor site-footer__decor--star" aria-hidden="true"></span>
+	<span class="site-footer__decor site-footer__decor--planet" aria-hidden="true"></span>
+	<span class="site-footer__decor site-footer__decor--rocket" aria-hidden="true"></span>
+
+	<div class="container">
+		<div class="site-footer__grid">
+			<div class="site-footer__brand-col">
+				<a class="site-footer__brand" href="{{ site.url }}" aria-label="{{ site.name }}">
+					{% if acf.logo %}
+						<img src="{{ acf.logo.url }}" alt="{{ acf.logo.alt|default(site.name) }}">
+					{% else %}
+						{{ site.name }}
+					{% endif %}
+				</a>
+
+				<p class="site-footer__text">
+					Mobilne atrakcje dla dzieci, szkół, rodzin i firm. Przyjeżdżamy z gotową zabawą, energią i bezpieczną organizacją wydarzenia.
+				</p>
+
+				{% if global_settings.social_facebook_url or global_settings.social_instagram_url or global_settings.social_x_url or global_settings.social_linkedin_url %}
+					<div class="site-footer__socials" aria-label="Social media">
+						{% if global_settings.social_facebook_url %}
+							<a href="{{ global_settings.social_facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v5h4v-5h3.2l.8-4h-4V9c0-.7.3-1 1-1Z"/></svg>
+							</a>
+						{% endif %}
+						{% if global_settings.social_instagram_url %}
+							<a href="{{ global_settings.social_instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.4"/><circle cx="17" cy="7" r="1"/></svg>
+							</a>
+						{% endif %}
+						{% if global_settings.social_x_url %}
+							<a href="{{ global_settings.social_x_url }}" target="_blank" rel="noopener noreferrer" aria-label="X">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg>
+							</a>
+						{% endif %}
+						{% if global_settings.social_linkedin_url %}
+							<a href="{{ global_settings.social_linkedin_url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10v9M6 6.5v.1M11 19v-9M11 14c0-2.4 1.3-4 3.6-4 2.1 0 3.4 1.4 3.4 4v5"/></svg>
+							</a>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+
+			<nav class="site-footer__col" aria-label="Szybkie linki">
+				<h2 class="site-footer__heading">Szybkie linki</h2>
+				<ul class="site-footer__links">
+					<li><a href="{{ function('home_url', '/atrakcje/') }}">Atrakcje</a></li>
+					<li><a href="{{ function('home_url', '/o-nas/') }}">O nas</a></li>
+					<li><a href="{{ function('home_url', '/kontakt/') }}">Kontakt</a></li>
+					<li><a href="http://speedshot.pl/oferta-speedshot-2025.pdf" target="_blank" rel="noopener noreferrer">Oferta 2025</a></li>
+				</ul>
+			</nav>
+
+			<nav class="site-footer__col" aria-label="Informacje">
+				<h2 class="site-footer__heading">Informacje</h2>
+				<ul class="site-footer__links">
+					<li><a href="{{ function('home_url', '/imprezy-integracyjne-dla-firm/') }}">Imprezy integracyjne</a></li>
+					<li><a href="{{ function('home_url', '/pikniki-plenerowe/') }}">Pikniki plenerowe</a></li>
+					<li><a href="{{ function('home_url', '/kolonie-i-wycieczki-szkolne/') }}">Wycieczki szkolne</a></li>
+					<li><a href="{{ function('home_url', '/urodziny-dla-dzieci/') }}">Urodziny dla dzieci</a></li>
+				</ul>
+			</nav>
+
+			<div class="site-footer__col site-footer__contact">
+				<h2 class="site-footer__heading">Kontakt</h2>
+				<ul class="site-footer__contact-list">
+					<li>
+						<span class="site-footer__contact-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-12A7 7 0 0 0 5 9c0 6.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+						</span>
+						<span>Szmaragdowa 115a<br>55-200 Oława</span>
+					</li>
+					<li>
+						<span class="site-footer__contact-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+						</span>
+						<a class="site-footer__email" href="mailto:info@centrumrozrywki-speedshot.pl">
+							<span>info@centrumrozrywki</span>
+							<span>-speedshot.pl</span>
+						</a>
+					</li>
+					<li>
+						<span class="site-footer__contact-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><path d="M6.6 4.5 9 9.6l-2 1.5c1.2 2.5 3.4 4.7 5.9 5.9l1.5-2 5.1 2.4c.4.2.6.6.5 1.1l-.6 2.2c-.1.5-.6.8-1.1.8C9.5 21.5 2.5 14.5 2.5 5.7c0-.5.3-1 .8-1.1l2.2-.6c.5-.1.9.1 1.1.5Z"/></svg>
+						</span>
+						<a href="tel:+48536304931">+48 536 304 931</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		{% set footer_cities = {
+			'warszawa': 'Warszawa',
+			'wroclaw': 'Wrocław',
+			'poznan': 'Poznań',
+			'katowice': 'Katowice',
+			'krakow': 'Kraków',
+			'opole': 'Opole',
+			'lodz': 'Łódź'
+		} %}
+		<nav class="site-footer__cities" aria-label="Imprezy firmowe w miastach">
+			<h2 class="site-footer__cities-title">Imprezy firmowe w Twoim mieście</h2>
+			<ul class="site-footer__cities-list">
+				{% for slug, city in footer_cities %}
+					<li><a href="{{ function('home_url', '/imprezy-firmowe-' ~ slug ~ '/') }}">Imprezy firmowe {{ city }}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
+
+		<div class="site-footer__bottom">
+			<p>&copy; {{ "now"|date("Y") }} {{ site.name }}. Wszystkie prawa zastrzeżone.</p>
+			<div class="site-footer__legal">
+				<a href="{{ function('home_url', '/polityka-prywatnosci/') }}">Polityka prywatności i cookies</a>
+				<a href="https://tobiaszgerczuk.pl" target="_blank" rel="noopener noreferrer">Realizacja: tobiaszgerczuk.pl</a>
+			</div>
+		</div>
+	</div>
+</footer>

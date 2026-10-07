@@ -54,12 +54,19 @@
     transition: transform 0.45s ease;
   }
 
+  &__grid--fit-contain &__thumb {
+    object-fit: contain;
+  }
+
+  &__grid--fit-contain &__item {
+
+  }
+
   &__zoom {
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
-    background: rgba($color-primary, 0.52);
     color: $color-white;
     opacity: 0;
     transition: opacity 0.25s ease;

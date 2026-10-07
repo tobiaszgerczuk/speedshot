@@ -42,4 +42,7 @@ foreach ($raw_images as $img) {
 $context['images']  = $images;
 $context['columns'] = (int) ($fields['photo_gallery_columns'] ?? 3);
 
+$fit = $fields['photo_gallery_fit'] ?? 'cover';
+$context['fit'] = in_array($fit, ['cover', 'contain'], true) ? $fit : 'cover';
+
 Timber::render('blocks/photo-gallery/photo-gallery.twig', $context);

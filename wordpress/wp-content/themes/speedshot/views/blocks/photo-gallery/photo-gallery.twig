@@ -2,7 +2,7 @@
 <section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}
   data-gallery>
   <div class="container">
-    <div class="block-photo-gallery__grid block-photo-gallery__grid--cols-{{ columns }}">
+    <div class="block-photo-gallery__grid block-photo-gallery__grid--cols-{{ columns }} block-photo-gallery__grid--fit-{{ fit }}">
       {% for image in images %}
         <button class="block-photo-gallery__item"
                 data-gallery-open="{{ loop.index0 }}"

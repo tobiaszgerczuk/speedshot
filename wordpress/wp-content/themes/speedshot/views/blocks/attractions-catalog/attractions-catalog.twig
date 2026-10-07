@@ -1,0 +1,41 @@
+<section{% if section_id %} id="{{ section_id }}"{% endif %} class="{{ section_classes }}"{% if section_style %} style="{{ section_style }}"{% endif %}>
+  <div class="container">
+
+    <div class="block-attractions-catalog__header" data-reveal="up" data-reveal-duration="760">
+      {% if eyebrow %}<p class="block-attractions-catalog__eyebrow">{{ eyebrow }}</p>{% endif %}
+      <h2 class="block-attractions-catalog__title">{{ title }}</h2>
+      {% if subtitle %}<h3 class="block-attractions-catalog__subtitle">{{ subtitle }}</h3>{% endif %}
+      {% if intro %}<div class="block-attractions-catalog__intro">{{ intro|raw }}</div>{% endif %}
+    </div>
+
+    {% if files %}
+      <div class="block-attractions-catalog__grid">
+        {% for file in files %}
+          <a class="block-attractions-catalog__card"
+             href="{{ file.url }}" target="_blank" rel="noopener"
+             data-reveal="up" data-reveal-delay="{{ loop.index0 * 90 }}" data-reveal-duration="700">
+
+            <span class="block-attractions-catalog__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </span>
+
+            <span class="block-attractions-catalog__body">
+              <span class="block-attractions-catalog__label">{{ file.label }}</span>
+              {% if file.note %}<span class="block-attractions-catalog__note">{{ file.note }}</span>{% endif %}
+              <span class="block-attractions-catalog__meta">
+                PDF{% if file.size %} · {{ file.size }}{% endif %}
+              </span>
+            </span>
+
+            <span class="block-attractions-catalog__cta" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </span>
+          </a>
+        {% endfor %}
+      </div>
+    {% elseif is_preview %}
+      <p class="block-attractions-catalog__placeholder">Dodaj pliki PDF w ustawieniach bloku.</p>
+    {% endif %}
+
+  </div>
+</section>

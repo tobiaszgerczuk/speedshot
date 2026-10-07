@@ -57,7 +57,7 @@
 			<nav class="site-footer__col" aria-label="Informacje">
 				<h2 class="site-footer__heading">Informacje</h2>
 				<ul class="site-footer__links">
-					<li><a href="{{ function('home_url', '/imprezy-integracyjne/') }}">Imprezy integracyjne</a></li>
+					<li><a href="{{ function('home_url', '/imprezy-integracyjne-dla-firm/') }}">Imprezy integracyjne</a></li>
 					<li><a href="{{ function('home_url', '/pikniki-plenerowe/') }}">Pikniki plenerowe</a></li>
 					<li><a href="{{ function('home_url', '/kolonie-i-wycieczki-szkolne/') }}">Wycieczki szkolne</a></li>
 					<li><a href="{{ function('home_url', '/urodziny-dla-dzieci/') }}">Urodziny dla dzieci</a></li>
@@ -91,6 +91,24 @@
 				</ul>
 			</div>
 		</div>
+
+		{% set footer_cities = {
+			'warszawa': 'Warszawa',
+			'wroclaw': 'Wrocław',
+			'poznan': 'Poznań',
+			'katowice': 'Katowice',
+			'krakow': 'Kraków',
+			'opole': 'Opole',
+			'lodz': 'Łódź'
+		} %}
+		<nav class="site-footer__cities" aria-label="Imprezy firmowe w miastach">
+			<h2 class="site-footer__cities-title">Imprezy firmowe w Twoim mieście</h2>
+			<ul class="site-footer__cities-list">
+				{% for slug, city in footer_cities %}
+					<li><a href="{{ function('home_url', '/imprezy-firmowe-' ~ slug ~ '/') }}">Imprezy firmowe {{ city }}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
 
 		<div class="site-footer__bottom">
 			<p>&copy; {{ "now"|date("Y") }} {{ site.name }}. Wszystkie prawa zastrzeżone.</p>

@@ -15,7 +15,7 @@
            data-reveal="up" data-reveal-delay="{{ loop.index0 * 100 }}" data-reveal-duration="680">
 
           {# Zdjęcie / placeholder #}
-          <div class="block-featured-attractions__image"
+          <div class="block-featured-attractions__image block-featured-attractions__image--pos-{{ item.image_position ?: 'center' }}"
                {% if item.image %}style="background-image: url('{{ item.image }}')"{% endif %}>
             {% if not item.image %}
               <span class="block-featured-attractions__image-icon">

@@ -1,0 +1,18 @@
+{
+    "title": "Katalog atrakcji",
+    "description": "Sekcja z linkami do pobrania katalogu/oferty w formacie PDF.",
+    "category": "wco-blocks",
+    "icon": "media-document",
+    "keywords": [
+        "katalog",
+        "oferta",
+        "pdf",
+        "pobierz",
+        "do pobrania"
+    ],
+    "mode": "preview",
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true
+    }
+}
